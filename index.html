@@ -7,21 +7,21 @@
     <meta name="description" content="Softurf Solutions is Zimbabwe's trusted technology partner for mobile apps, web apps, WhatsApp chatbots, and secure bill payments.">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
-            --secondary: #ec4899;
+            --primary-light: #818cf8;
             --dark: #0f172a;
             --dark-2: #1e293b;
-            --dark-3: #334155;
             --gray: #64748b;
             --gray-light: #94a3b8;
             --light: #f8fafc;
             --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-light));
         }
         
         html { scroll-behavior: smooth; }
@@ -134,8 +134,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 60%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
         }
         
         .hero-inner {
@@ -147,7 +147,7 @@
         .hero-badge {
             display: inline-block;
             background: rgba(99, 102, 241, 0.2);
-            color: #a5b4fc;
+            color: var(--primary-light);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -339,7 +339,7 @@
         }
         
         /* ===== PLATFORM SECTION ===== */
-        .platform-section { background: var(--dark); color: white; }
+        .platform-section { background: var(--dark-2); color: white; }
         
         .platform-section .section-header h2 { color: white; }
         .platform-section .section-header p { color: var(--gray-light); }
@@ -439,7 +439,7 @@
         }
         
         .about-image {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient);
             border-radius: 20px;
             padding: 40px;
             display: flex;
@@ -492,7 +492,7 @@
         
         /* ===== CTA SECTION ===== */
         .cta-section {
-            background: var(--gradient);
+            background: var(--primary);
             padding: 80px 0;
             text-align: center;
             color: white;
@@ -1080,11 +1080,11 @@
                     <form class="contact-form" id="contactForm">
                         <div class="form-group">
                             <label>Your Name</label>
-                            <input type="text" name="name" required placeholder="John Doe">
+                            <input type="text" name="from_name" required placeholder="John Doe">
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" name="email" required placeholder="john@example.com">
+                            <input type="email" name="from_email" required placeholder="john@example.com">
                         </div>
                         <div class="form-group">
                             <label>Phone Number</label>
@@ -1156,17 +1156,33 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
+        (function() {
+            emailjs.init("G4HMrNj5WjEnvP_d4");
+        })();
+        
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-                this.reset();
-            }, 3000);
+            
+            emailjs.sendForm('service_uh7fa3k', 'template_4yiacgn', this)
+                .then(function() {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                    document.getElementById('contactForm').reset();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+                    }, 3000);
+                }, function(error) {
+                    btn.innerHTML = '<i class="fas fa-times"></i> Failed. Try Again';
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+                    }, 3000);
+                });
         });
     </script>
 </body>
