@@ -1,1333 +1,1166 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softurf Solutions — Mobile Apps, Web Apps, Chatbots, Bill Payments</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Softurf Solutions — Mobile Apps, Web Apps, Chatbots & Bill Payments | Zimbabwe</title>
+    <meta name="description" content="Softurf Solutions is Zimbabwe's trusted technology partner for mobile apps, web apps, WhatsApp chatbots, and secure bill payments.">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --bg: #0b1120;
-            /* deep navy */
-            --bg-soft: #0f172a;
-            /* slate-900 */
-            --surface: #0f172a;
-            --surface-2: #111827;
-            --text: #e5e7eb;
-            /* slate-200 */
-            --muted: #94a3b8;
-            /* slate-400 */
-            --border: #1f2937;
-            /* slate-800 */
-            --primary-400: #a78bfa;
-            --primary-500: #8b5cf6;
-            /* violet */
-            --primary-600: #7c3aed;
-            --accent-400: #f472b6;
-            --accent-500: #ec4899;
-            /* pink */
-            --accent-600: #db2777;
-            --cyan-500: #22d3ee;
-            /* cyan */
-            --success: #10b981;
-            --warning: #f59e0b;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #0f172a;
+            --dark-2: #1e293b;
+            --dark-3: #334155;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
         }
-
-        body {
-            box-sizing: border-box;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Nunito', sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            color: var(--text);
-            background: radial-gradient(1200px 700px at 10% 10%, rgba(139, 92, 246, 0.15), transparent 60%),
-                radial-gradient(900px 600px at 90% 10%, rgba(236, 72, 153, 0.12), transparent 60%),
-                linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
         }
-
+        
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
-
-        /* Header & Navigation */
-        header {
-            background: rgba(15, 23, 42, 0.6);
-            color: var(--text);
-            padding: 1rem 0;
+        
+        /* ===== NAVIGATION ===== */
+        .header {
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
-            backdrop-filter: saturate(160%) blur(10px);
+            background: var(--dark);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
-
-        nav {
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 44px;
+            width: auto;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav a {
+            color: var(--gray-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .nav a:hover, .nav a.active { color: var(--white); }
+        
+        .nav-cta {
+            background: var(--gradient);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ===== PAGES ===== */
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: var(--dark);
+            color: white;
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+        }
+        
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-light);
+            margin-bottom: 36px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        /* ===== FEATURES STRIP ===== */
+        .features-strip {
+            background: var(--white);
+            padding: 40px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .feature-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* ===== SECTIONS ===== */
+        section { padding: 100px 0; }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-label {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.15rem;
+        }
+        
+        /* ===== SERVICES SECTION ===== */
+        .services-section { background: var(--white); }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.15);
+        }
+        
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* ===== PLATFORM SECTION ===== */
+        .platform-section { background: var(--dark); color: white; }
+        
+        .platform-section .section-header h2 { color: white; }
+        .platform-section .section-header p { color: var(--gray-light); }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .platform-card {
+            background: var(--dark-2);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .platform-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+        
+        .platform-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .platform-card p {
+            color: var(--gray-light);
+            font-size: 0.95rem;
+        }
+        
+        /* ===== PROCESS SECTION ===== */
+        .process-section { background: var(--light); }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 36px;
+            right: -12px;
+            width: 24px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .process-step:last-child::after { display: none; }
+        
+        .step-number {
+            width: 72px;
+            height: 72px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 0 auto 20px;
+            color: white;
+        }
+        
+        .process-step h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        /* ===== ABOUT SECTION ===== */
+        .about-section { background: var(--white); }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-image {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-image i {
+            font-size: 8rem;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .about-stat {
+            text-align: center;
+        }
+        
+        .about-stat .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-stat .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: var(--gradient);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+        
+        .cta-section p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+        
+        .cta-section .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta-section .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        /* ===== CONTACT SECTION ===== */
+        .contact-section { background: var(--light); }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 48px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 32px;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .contact-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea { resize: vertical; min-height: 140px; }
+        
+        .contact-form .btn { width: 100%; }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-brand .footer-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand p {
+            color: var(--gray-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .footer-col h4 {
+            font-weight: 800;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-col a {
+            display: block;
+            color: var(--gray-light);
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-col a:hover { color: var(--primary); }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .brand {
+        
+        .footer-bottom p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            gap: 16px;
         }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: .2px;
-        }
-
-        .logo-subtitle {
-            font-size: .85rem;
-            color: var(--muted);
-            line-height: 1;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-400);
-        }
-
-        .mobile-menu {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 80px;
-        }
-
-        .page {
-            display: none;
-            min-height: calc(100vh - 80px);
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: radial-gradient(900px 500px at 15% 10%, rgba(139, 92, 246, 0.25), transparent 60%),
-                radial-gradient(700px 400px at 85% 15%, rgba(236, 72, 153, 0.18), transparent 60%),
-                radial-gradient(800px 500px at 50% 90%, rgba(34, 211, 238, 0.12), transparent 60%);
-            color: var(--text);
-            padding: 120px 0 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            display: none;
-        }
-
-        .blob {
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.45;
-            animation: float 18s ease-in-out infinite;
-            mix-blend-mode: multiply;
-        }
-
-        .blob.violet {
-            background: radial-gradient(circle at 30% 30%, var(--primary-500), transparent 60%);
-        }
-
-        .blob.pink {
-            background: radial-gradient(circle at 60% 40%, var(--accent-500), transparent 60%);
-            animation-duration: 22s;
-        }
-
-        .blob.cyan {
-            background: radial-gradient(circle at 50% 50%, var(--cyan-500), transparent 60%);
-            animation-duration: 26s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(20px, -30px) scale(1.05);
-            }
-
-            66% {
-                transform: translate(-25px, 20px) scale(0.98);
-            }
-
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            margin-bottom: .75rem;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
-            max-width: 760px;
-            margin-left: auto;
-            margin-right: auto;
-            color: var(--muted);
-        }
-
-        .cta-row {
-            display: flex;
-            gap: .75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-            color: white;
-            padding: 14px 22px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 10px 28px rgba(139, 92, 246, 0.28);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 16px 36px rgba(236, 72, 153, 0.35);
-        }
-
-        .cta-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            box-shadow: none;
-        }
-
-        .badge-row {
-            display: flex;
-            gap: .75rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1.25rem;
-        }
-
-        .badge {
-            border: 1px solid var(--border);
-            color: var(--muted);
-            background: rgba(255, 255, 255, 0.02);
-            padding: .4rem .7rem;
-            border-radius: 999px;
-            font-size: .85rem;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 0;
-        }
-
-        .service-card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.00)), var(--surface);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
-        }
-
-        .card-media {
-            width: 100%;
-            height: 180px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.10);
-        }
-
-        .card-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 22px 60px rgba(2, 6, 23, 0.5);
-            border-color: rgba(167, 139, 250, 0.35);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .service-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .chip-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .5rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-
-        .chip {
-            padding: .35rem .7rem;
-            border-radius: 999px;
-            background: #f1f5f9;
-            color: #0f172a;
-            font-size: .9rem;
-            border: 1px solid var(--border);
-        }
-
-        /* Section Styling */
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: var(--text);
-            margin-bottom: .75rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.05rem;
-            color: var(--muted);
-            margin-bottom: 2.25rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Dark band highlight */
-        .band-dark {
-            background: #000000;
-        }
-
-        .band-dark .section-title {
-            color: #f8fafc;
-        }
-
-        .band-dark .section-subtitle {
-            color: #cbd5e1;
-        }
-
-        .band-dark .about-text {
-            color: #cbd5e1;
-        }
-
-        .band-dark .feature-item {
-            background: #0f172a;
-            border-left: 4px solid var(--primary-500);
-            border: 1px solid var(--border);
-            box-shadow: 0 12px 36px rgba(2, 6, 23, 0.6);
-        }
-
-        .band-dark .feature-item h4 {
-            color: #e5e7eb;
-            font-weight: 800;
-        }
-
-        .band-dark .feature-item p {
-            color: #cbd5e1;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.5rem;
-        }
-
-        .testimonial-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.25rem;
-            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
-        }
-
-        .testimonial-author {
-            color: var(--text);
-            font-weight: 700;
-            margin-top: .75rem;
-        }
-
-        .testimonial-role {
-            color: var(--muted);
-            font-size: .95rem;
-        }
-
-        /* CTA Banner */
-        .cta-banner {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(236, 72, 153, 0.16));
-            border: 1px solid rgba(167, 139, 250, 0.35);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.5);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2rem;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--muted);
-        }
-
-        .about-features {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: #f1f5f9;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-500);
-        }
-
-        .feature-icon {
+        
+        .social-links a {
             width: 40px;
             height: 40px;
-            background: var(--primary-500);
-            border-radius: 50%;
+            background: var(--dark-2);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--gray-light);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
             color: white;
-            font-size: 1.2rem;
         }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
+        
+        /* ===== MOBILE ===== */
+        @media (max-width: 1024px) {
+            .process-grid { grid-template-columns: repeat(3, 1fr); }
+            .process-step::after { display: none; }
         }
-
-        .contact-info {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--surface);
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(2, 6, 23, 0.35);
-            border: 1px solid var(--border);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-        }
-
-        .contact-form {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(2, 6, 23, 0.08);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #374151;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-500);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.35);
-        }
-
-        /* Footer */
-        footer {
-            background: #0b1220;
-            color: white;
-            text-align: center;
-            padding: 2.5rem 0;
-            margin-top: 4rem;
-        }
-
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity .6s ease, transform .6s ease;
-        }
-
-        .reveal.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
-            .nav-links {
+            .nav { 
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: #ffffff;
+                background: var(--dark-2);
                 flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 2px 10px rgba(2, 6, 23, 0.06);
+                padding: 24px;
+                gap: 16px;
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .cta-row {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-content,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
+            .nav.active { display: flex; }
+            .mobile-toggle { display: block; }
+            
+            .logo img { height: 36px; }
+            
+            .hero h1 { font-size: 2.25rem; }
+            .hero { padding: 120px 0 60px; }
+            
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            
+            .section-header h2 { font-size: 2rem; }
+            
+            .about-grid,
+            .contact-grid,
+            .footer-grid { grid-template-columns: 1fr; }
+            
+            .about-stats { grid-template-columns: repeat(3, 1fr); }
+            .about-stat .number { font-size: 1.75rem; }
+            
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            
+            .hero-btns { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
         }
-
+        
         @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .hero {
-                padding: 60px 0;
-            }
-
-            .hero h1 {
-                font-size: 1.7rem;
-            }
-
-            .service-card {
-                padding: 1.5rem;
-            }
+            .features-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <nav class="container">
-            <div class="brand">
-                <a href="#home" class="logo" onclick="showPage('home'); return false;">Softurf Solutions</a>
-                <span class="logo-subtitle">Unleashing the power of software</span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="showPage('home'); return false;">Home</a></li>
-                <li><a href="#services" onclick="showPage('services'); return false;">Services</a></li>
-                <li><a href="#about" onclick="showPage('about'); return false;">About Us</a></li>
-                <li><a href="#contact" onclick="showPage('contact'); return false;">Contact</a></li>
-            </ul>
-            <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
-        </nav>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo" onclick="navigate('home'); return false;">
+                <img src="softurf_updated.png" alt="Softurf">
+            </a>
+            <nav class="nav" id="navLinks">
+                <a href="#" class="active" data-page="home" onclick="navigate('home'); return false;">Home</a>
+                <a href="#" data-page="services" onclick="navigate('services'); return false;">Services</a>
+                <a href="#" data-page="about" onclick="navigate('about'); return false;">About</a>
+                <a href="#" data-page="contact" onclick="navigate('contact'); return false;">Contact</a>
+                <a href="#" class="nav-cta" onclick="navigate('contact'); return false;">Get Started</a>
+            </nav>
+            <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
-    <main>
-        <!-- Home Page -->
-        <div id="home" class="page active">
-            <section class="hero">
-                <div class="container">
-                    <div class="hero-content">
-                        <div class="blob violet" style="top:-120px; left:-60px;"></div>
-                        <div class="blob pink" style="top:-160px; right:-100px;"></div>
-                        <div class="blob cyan" style="bottom:-140px; left:40%;"></div>
-
-                        <h1>World‑class Apps, Chatbots & Bill Payments for Zimbabwe</h1>
-                        <p>We design and build mobile apps, web apps, and WhatsApp & Messenger chatbots—plus we’re
-                            trusted bank agents enabling fast, secure bill payments like ZESA, DStv and School Fees.</p>
-                        <div class="cta-row">
-                            <a href="#services" class="cta-button" onclick="showPage('services'); return false;">Explore
-                                Services</a>
-                            <a href="#contact" class="cta-button cta-secondary"
-                                onclick="showPage('contact'); return false;">Talk to Us</a>
-                        </div>
-                        <div class="badge-row">
-                            <span class="badge">Mobile Apps</span>
-                            <span class="badge">Web Apps</span>
-                            <span class="badge">WhatsApp & Messenger Bots</span>
-                            <span class="badge">ZESA & DStv Bill Payments</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section reveal">
-                <div class="container">
-                    <h2 class="section-title">Why Choose Softurf Solutions?</h2>
-                    <div class="services-grid">
-                        <div class="service-card reveal">
-                            <div class="service-icon">🚀</div>
-                            <h3>Innovation First</h3>
-                            <p>We leverage cutting-edge technologies to deliver solutions that drive your business
-                                forward in the digital age.</p>
-                        </div>
-                        <div class="service-card reveal">
-                            <div class="service-icon">🛡️</div>
-                            <h3>Reliable & Secure</h3>
-                            <p>Our solutions are built with security and reliability at their core, ensuring your
-                                business operations run smoothly.</p>
-                        </div>
-                        <div class="service-card reveal">
-                            <div class="service-icon">🎯</div>
-                            <h3>Tailored Solutions</h3>
-                            <p>Every solution is customized to meet your specific business needs and objectives for
-                                maximum impact.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Home Previews: Services, About, Contact -->
-        <section class="section reveal" aria-label="Home Services Preview">
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
             <div class="container">
-                <h2 class="section-title">Services at a Glance</h2>
-                <p class="section-subtitle">Mobile apps, web apps, chatbots, and nationwide bill payments</p>
+                <div class="hero-inner">
+                    <span class="hero-badge">Trusted Technology Partner in Zimbabwe</span>
+                    <h1>World-Class <span>Mobile Apps, Web Apps & Chatbots</span> for Your Business</h1>
+                    <p>We design and build fast, secure applications plus trusted bill payment services for ZESA, DStv, and more across Zimbabwe.</p>
+                    <div class="hero-btns">
+                        <button class="btn btn-primary" onclick="navigate('services')">
+                            Explore Services <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-outline" onclick="navigate('contact')">
+                            Talk to Us <i class="fas fa-comments"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="features-strip">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                        <div>
+                            <h4>MVP in 6-8 Weeks</h4>
+                            <p>Fast delivery of minimum viable products</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                        <div>
+                            <h4>Secure & Reliable</h4>
+                            <p>Bank-grade security for your solutions</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <div>
+                            <h4>24/7 Support</h4>
+                            <p>Round-the-clock customer assistance</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                        <div>
+                            <h4>Trusted Bank Agents</h4>
+                            <p>Official bill payment services</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">What We Offer</span>
+                    <h2>Our Services</h2>
+                    <p>Comprehensive solutions tailored to transform your business</p>
+                </div>
                 <div class="services-grid">
-                    <div class="service-card reveal">
+                    <div class="service-card">
                         <div class="service-icon">📱</div>
                         <h3>Mobile App Development</h3>
-                        <p>High‑performance Android & iOS apps with modern UX and maintainable architecture.</p>
-                        <div class="chip-group">
-                            <span class="chip">Native & Cross‑platform</span>
-                            <span class="chip">Secure Auth</span>
-                            <span class="chip">App Store Ready</span>
-                        </div>
+                        <p>Native and cross-platform apps for Android and iOS with modern UX and reliable performance.</p>
                     </div>
-
-                    <div class="service-card reveal">
+                    <div class="service-card">
                         <div class="service-icon">🕸️</div>
-                        <h3>Web Apps & Websites</h3>
-                        <p>Fast, secure web platforms and premium sites that convert and scale.</p>
-                        <div class="chip-group">
-                            <span class="chip">Responsive</span>
-                            <span class="chip">SEO‑friendly</span>
-                            <span class="chip">Cloud‑ready</span>
-                        </div>
+                        <h3>Web Applications</h3>
+                        <p>Custom web apps and responsive websites built with modern frameworks for scalability.</p>
                     </div>
-
-                    <div class="service-card reveal">
+                    <div class="service-card">
                         <div class="service-icon">🤖</div>
-                        <h3>WhatsApp & Messenger Chatbots</h3>
-                        <p>Automate support and sales with robust, integrated conversational bots.</p>
-                        <div class="chip-group">
-                            <span class="chip">WhatsApp Business API</span>
-                            <span class="chip">Facebook Messenger</span>
-                            <span class="chip">CRM Integrations</span>
-                        </div>
+                        <h3>Chatbot Development</h3>
+                        <p>WhatsApp and Messenger bots that automate customer interactions and support.</p>
                     </div>
-
-                    <div class="service-card reveal">
-                        <div class="service-icon">🏦</div>
-                        <h3>Bill Payments & Agency</h3>
-                        <p>Trusted bank agents providing fast, secure payments across Zimbabwe.</p>
-                        <div class="chip-group">
-                            <span class="chip">ZESA</span>
-                            <span class="chip">DStv</span>
-                            <span class="chip">School Fees</span>
-                            <span class="chip">Mobile Money</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cta-row" style="margin-top: 1rem;">
-                    <a class="cta-button" href="#services" onclick="showPage('services'); return false;">View All
-                        Services</a>
-                    <a class="cta-button cta-secondary" href="#contact" onclick="showPage('contact'); return false;">Get
-                        a Quote</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bill Payments Highlight -->
-        <section class="section reveal" aria-label="Bill Payments">
-            <div class="container">
-                <h2 class="section-title">Bill Payments Made Easy</h2>
-                <p class="section-subtitle">As trusted bank agents, we help you pay essential bills securely and
-                    quickly.</p>
-                <div class="services-grid">
-                    <div class="service-card reveal">
+                    <div class="service-card">
                         <div class="service-icon">⚡</div>
-                        <h3>ZESA Electricity</h3>
-                        <p>Instant token purchases and meter top‑ups without the hassle.</p>
+                        <h3>ZESA Payments</h3>
+                        <p>Instant electricity token purchases and meter top-ups. Quick, reliable, and hassle-free.</p>
                     </div>
-                    <div class="service-card reveal">
+                    <div class="service-card">
                         <div class="service-icon">📺</div>
-                        <h3>DStv Subscriptions</h3>
-                        <p>Keep your entertainment going—pay and reconnect fast.</p>
+                        <h3>DStv & TV Payments</h3>
+                        <p>Pay your DStv subscriptions and reconnect services easily through our trusted agency.</p>
                     </div>
-                    <div class="service-card reveal">
-                        <div class="service-icon">🏫</div>
-                        <h3>School Fees</h3>
-                        <p>Secure payments for schools and institutions across Zimbabwe.</p>
-                    </div>
-                    <div class="service-card reveal">
-                        <div class="service-icon">💳</div>
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
                         <h3>Mobile Money</h3>
-                        <p>Convenient wallet services and transfers when you need them.</p>
+                        <p>EcoCash, OneMoney, and other mobile money services for convenient transactions.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials -->
-        <section class="section reveal" aria-label="Testimonials">
+        <section class="platform-section">
             <div class="container">
-                <h2 class="section-title">Trusted by Teams Across Zimbabwe</h2>
-                <p class="section-subtitle">Real outcomes, dependable delivery, long‑term partnerships.</p>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <p>“Softurf built our app on time and it’s been rock solid. Our customers love the speed and
-                            ease of use.”</p>
-                        <div class="testimonial-author">Tendai M.</div>
-                        <div class="testimonial-role">Operations Lead, Retail</div>
+                <div class="section-header">
+                    <span class="section-label" style="color: #a5b4fc;">Platforms</span>
+                    <h2>Development for Every Platform</h2>
+                    <p>We build apps that run flawlessly across all platforms your customers use</p>
+                </div>
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <h3><i class="fab fa-apple"></i> iOS Development</h3>
+                        <p>Native iOS applications for iPhone and iPad with Swift, featuring biometric auth, Apple Pay, and more.</p>
                     </div>
-                    <div class="testimonial-card">
-                        <p>“Their WhatsApp bot cut response times dramatically. Integration with our CRM just worked.”
-                        </p>
-                        <div class="testimonial-author">Rufaro K.</div>
-                        <div class="testimonial-role">Customer Support Manager</div>
+                    <div class="platform-card">
+                        <h3><i class="fab fa-android"></i> Android Development</h3>
+                        <p>Native Android apps using Kotlin and Java following Material Design guidelines for smooth performance.</p>
                     </div>
-                    <div class="testimonial-card">
-                        <p>“Reliable partner for our payments—quick, secure, and always available when we need help.”
-                        </p>
-                        <div class="testimonial-author">Brian N.</div>
-                        <div class="testimonial-role">Finance Administrator</div>
+                    <div class="platform-card">
+                        <h3><i class="fas fa-code"></i> Cross-Platform</h3>
+                        <p>Flutter and React Native apps that work on both iOS and Android from a single codebase.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Conversion CTA Banner -->
-        <section class="section reveal" aria-label="Conversion CTA">
+        <section class="process-section">
             <div class="container">
-                <div class="cta-banner">
-                    <h3 style="margin-bottom:.5rem; font-size:1.4rem;">Have a project or need to pay a bill?</h3>
-                    <p style="color:var(--muted); margin-bottom:1rem;">Tell us what you need—we’ll recommend the
-                        fastest, most reliable path forward.</p>
-                    <div class="cta-row" style="margin-top:.25rem;">
-                        <a class="cta-button" href="#contact" onclick="showPage('contact'); return false;">Start a
-                            Project</a>
-                        <a class="cta-button cta-secondary" href="#services"
-                            onclick="showPage('services'); return false;">See Our Capabilities</a>
+                <div class="section-header">
+                    <span class="section-label">Our Process</span>
+                    <h2>How We Work</h2>
+                    <p>A transparent, agile approach from discovery to deployment</p>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Discovery</h4>
+                        <p>Understand your goals and requirements</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Strategy</h4>
+                        <p>Plan architecture and tech stack</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Design</h4>
+                        <p>Create UI/UX wireframes and prototypes</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Develop</h4>
+                        <p>Build using agile methodology</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h4>Test & Launch</h4>
+                        <p>Rigorous QA and deployment</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <h4>Support</h4>
+                        <p>Ongoing maintenance and updates</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section reveal band-dark" aria-label="Home About Preview">
+        <section class="cta-section">
             <div class="container">
-                <h2 class="section-title">About Us</h2>
-                <p class="section-subtitle">We pair local market understanding with world‑class engineering</p>
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Let's discuss how we can help you achieve your digital goals</p>
+                <button class="btn" onclick="navigate('contact')">
+                    Start a Conversation <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+    </div>
 
-                <div class="about-content" style="margin-top: 0;">
-                    <div class="about-text">
-                        <p>Softurf Solutions helps organizations across Zimbabwe unlock growth through reliable, secure,
-                            and innovative technology. Our seasoned team builds solutions that fit your goals and your
-                            context—so you can move faster with confidence.</p>
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
+            <div class="container">
+                <div class="hero-inner">
+                    <span class="hero-badge">Our Expertise</span>
+                    <h1>Professional <span>Services</span></h1>
+                    <p>End-to-end technology solutions and financial services for Zimbabwe businesses</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Mobile App Development</h3>
+                        <p>High-performance Android and iOS apps with intuitive interfaces, secure authentication, and smooth performance across all devices.</p>
                     </div>
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">💡</div>
-                            <div>
-                                <h4>Modern stacks & delivery</h4>
-                                <p>Modern stacks and proven delivery practices</p>
+                    <div class="service-card">
+                        <div class="service-icon">🕸️</div>
+                        <h3>Web Applications</h3>
+                        <p>Custom web apps and responsive websites built with modern frameworks. SEO-friendly, cloud-ready, and designed to scale.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🤖</div>
+                        <h3>Chatbot Development</h3>
+                        <p>WhatsApp and Messenger bots that automate customer interactions, reduce response times, and integrate with your CRM.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>ZESA Payments</h3>
+                        <p>Instant electricity token purchases and meter top-ups. Quick, reliable, and hassle-free transactions.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📺</div>
+                        <h3>DStv & TV Payments</h3>
+                        <p>Pay your DStv subscriptions and reconnect services easily through our trusted agency.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏫</div>
+                        <h3>School Fees Payments</h3>
+                        <p>Secure school fee payments for institutions across Zimbabwe with instant confirmation.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
+                        <h3>Mobile Money</h3>
+                        <p>EcoCash, OneMoney, and other mobile money services for convenient transactions.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>UI/UX Design</h3>
+                        <p>Beautiful, user-centered designs that enhance engagement and create memorable experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
+            <div class="container">
+                <div class="hero-inner">
+                    <span class="hero-badge">Who We Are</span>
+                    <h1>About <span>Softurf</span></h1>
+                    <p>Your trusted technology partner in Zimbabwe</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="about-content">
+                        <h2>Building Digital Solutions for Zimbabwe</h2>
+                        <p>Softurf Solutions is a Zimbabwean technology company dedicated to helping businesses and individuals succeed through innovative software and reliable services.</p>
+                        <p>We combine technical expertise with a deep understanding of the local market to deliver solutions that truly work for our clients.</p>
+                        <p>Beyond software, we're trusted bank agents providing essential bill payment services to communities across Zimbabwe.</p>
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <div class="number">50+</div>
+                                <div class="label">Projects Completed</div>
+                            </div>
+                            <div class="about-stat">
+                                <div class="number">30+</div>
+                                <div class="label">Happy Clients</div>
+                            </div>
+                            <div class="about-stat">
+                                <div class="number">5+</div>
+                                <div class="label">Years Experience</div>
                             </div>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">🛡️</div>
-                            <div>
-                                <h4>Reliability</h4>
-                                <p>Secure, maintainable systems and ongoing support</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+    </div>
 
-                <div style="text-align:center; margin-top: 2rem;">
-                    <a class="cta-button" onclick="showPage('about')">Learn more about us</a>
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
+            <div class="container">
+                <div class="hero-inner">
+                    <span class="hero-badge">Get In Touch</span>
+                    <h1>Contact <span>Us</span></h1>
+                    <p>Ready to start your project? Let's talk about how we can help.</p>
                 </div>
             </div>
         </section>
 
-        <section class="section reveal" aria-label="Home Contact Preview">
+        <section class="contact-section">
             <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Tell us about your goals—let’s make them happen</p>
-
-                <div class="contact-grid" style="grid-template-columns: 1fr;">
+                <div class="contact-grid">
                     <div class="contact-info">
+                        <h3>Reach Out</h3>
                         <div class="contact-item">
-                            <div class="contact-icon">📧</div>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div>
                                 <h4>Email</h4>
                                 <p>ceo@softurf.co.zw</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon">📞</div>
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
                             <div>
                                 <h4>Phone</h4>
-                                <p>+263782678233</p>
+                                <p>+263 78 267 8233</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="margin-bottom:0;">
-                            <div class="contact-icon">🌍</div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
                             <div>
                                 <h4>Location</h4>
                                 <p>Serving clients across Zimbabwe</p>
                             </div>
                         </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Mon-Fri: 8am - 5pm<br>Sat: 9am - 1pm</p>
+                            </div>
+                        </div>
                     </div>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" placeholder="+263 XX XXX XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- Services Page -->
-        <div id="services" class="page">
-            <section class="section reveal">
-                <div class="container">
-                    <h2 class="section-title">Our Services</h2>
-                    <p class="section-subtitle">Comprehensive IT solutions designed to transform your business and drive
-                        growth</p>
-
-                    <div class="services-grid">
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Mobile app development">
-                            </div>
-                            <div class="service-icon">📱</div>
-                            <h3>Mobile App Development</h3>
-                            <p>iOS and Android apps with smooth UX, fast performance, and modern architecture.</p>
-                        </div>
-
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Chatbots for WhatsApp and Messenger">
-                            </div>
-                            <div class="service-icon">🤖</div>
-                            <h3>Chatbots (WhatsApp & Messenger)</h3>
-                            <p>Automate support and sales with reliable conversational bots tailored to your workflows.
-                            </p>
-                            <div class="chip-group">
-                                <span class="chip">WhatsApp Business API</span>
-                                <span class="chip">Facebook Messenger</span>
-                                <span class="chip">CRM Integrations</span>
-                            </div>
-                        </div>
-
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Web apps and websites">
-                            </div>
-                            <div class="service-icon">🕸️</div>
-                            <h3>Web Apps & Websites</h3>
-                            <p>From corporate sites to full-stack platforms—fast, secure, and SEO-friendly.</p>
-                        </div>
-
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Financial services and bill payments">
-                            </div>
-                            <div class="service-icon">🏦</div>
-                            <h3>Financial Services</h3>
-                            <p>Convenient, secure payments and agency services to power your everyday needs.</p>
-                            <div class="chip-group">
-                                <span class="chip">ZESA</span>
-                                <span class="chip">DStv</span>
-                                <span class="chip">School Fees</span>
-                                <span class="chip">Mobile Money</span>
-                            </div>
-                        </div>
-
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Hardware solutions and repairs">
-                            </div>
-                            <div class="service-icon">🔧</div>
-                            <h3>Hardware Solutions & Repairs</h3>
-                            <p>Installation, maintenance, and diagnostics for computers, servers, and networking gear.
-                            </p>
-                        </div>
-
-                        <div class="service-card reveal">
-                            <div class="card-media">
-                                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop"
-                                    alt="Graphic and web design">
-                            </div>
-                            <div class="service-icon">🎨</div>
-                            <h3>Graphic & Web Design</h3>
-                            <p>Branding, UI/UX, and responsive websites that feel premium and on-brand.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- About Page -->
-        <div id="about" class="page">
-            <section class="section reveal">
-                <div class="container">
-                    <h2 class="section-title">About Softurf Solutions</h2>
-                    <p class="section-subtitle">Leading Zimbabwe's digital transformation with innovative technology
-                        solutions</p>
-
-                    <div class="about-content">
-                        <div class="about-text">
-                            <p>At Softurf Solutions, we are passionate about leveraging technology to solve real-world
-                                business challenges. Based in Zimbabwe, we have established ourselves as a trusted
-                                partner for businesses seeking reliable, innovative, and scalable IT solutions.</p>
-
-                            <p>Our team of experienced professionals combines deep technical expertise with a thorough
-                                understanding of the local market, enabling us to deliver solutions that are not only
-                                technologically advanced but also culturally relevant and business-focused.</p>
-
-                            <p>From startups to established enterprises, we have helped numerous organizations across
-                                Zimbabwe transform their operations, improve efficiency, and achieve their digital goals
-                                through our comprehensive suite of services.</p>
-                        </div>
-
-                        <div class="about-features">
-                            <div class="feature-item reveal">
-                                <div class="feature-icon">💡</div>
-                                <div>
-                                    <h4>Innovation</h4>
-                                    <p>Cutting-edge solutions using the latest technologies</p>
-                                </div>
-                            </div>
-
-                            <div class="feature-item reveal">
-                                <div class="feature-icon">🤝</div>
-                                <div>
-                                    <h4>Reliability</h4>
-                                    <p>Dependable services with 24/7 support and maintenance</p>
-                                </div>
-                            </div>
-
-                            <div class="feature-item reveal">
-                                <div class="feature-icon">🎯</div>
-                                <div>
-                                    <h4>Customer Focus</h4>
-                                    <p>Tailored solutions that align with your business objectives</p>
-                                </div>
-                            </div>
-
-                            <div class="feature-item reveal">
-                                <div class="feature-icon">🌍</div>
-                                <div>
-                                    <h4>Local Expertise</h4>
-                                    <p>Deep understanding of the Zimbabwean market and culture</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Contact Page -->
-        <div id="contact" class="page">
-            <section class="section reveal">
-                <div class="container">
-                    <h2 class="section-title">Contact Us</h2>
-                    <p class="section-subtitle">Ready to transform your business? Get in touch with our team today</p>
-
-                    <div class="contact-grid">
-                        <div class="contact-info">
-                            <h3 style="color: #1e40af; margin-bottom: 1.5rem; font-weight: 700;">Get In Touch</h3>
-
-                            <div class="contact-item">
-                                <div class="contact-icon">📧</div>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p>hello@softurf.co.zw</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-icon">📞</div>
-                                <div>
-                                    <h4>Phone</h4>
-                                    <p>+263782678233</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-icon">🏢</div>
-                                <div>
-                                    <h4>Business Hours</h4>
-                                    <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 9:00 AM - 1:00 PM</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-icon">🌍</div>
-                                <div>
-                                    <h4>Location</h4>
-                                    <p>Serving clients across Zimbabwe</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-form">
-                            <h3 style="color: #1e40af; margin-bottom: 1.5rem; font-weight: 700;">Send us a Message</h3>
-                            <form id="contactForm">
-                                <div class="form-group">
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="service">Service Interest</label>
-                                    <select id="service" name="service"
-                                        style="width: 100%; padding: 12px 15px; border: 2px solid #e5e7eb; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 1rem;">
-                                        <option value="">Select a service</option>
-                                        <option value="software-development">Software Development</option>
-                                        <option value="it-solutions">IT Solutions</option>
-                                        <option value="financial-services">Financial Services</option>
-                                        <option value="hardware-solutions">Hardware Solutions & Repairs</option>
-                                        <option value="graphic-design">Graphic & Web Design</option>
-                                        <option value="cloud-solutions">Cloud Solutions</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" name="message"
-                                        placeholder="Tell us about your project or requirements..." required></textarea>
-                                </div>
-
-                                <button type="submit" class="submit-btn">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div style="display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 1.25rem; align-items:start;">
-                <div>
-                    <div class="logo" style="display:block; margin-bottom:.5rem;">Softurf Solutions</div>
-                    <p style="color:var(--muted); max-width:520px;">Mobile & web apps, WhatsApp & Messenger chatbots,
-                        and secure bill payments across Zimbabwe.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="softurf_updated.png" alt="Softurf" class="footer-logo">
+                    <p>Your trusted partner for mobile apps, web apps, chatbots, and bill payment services in Zimbabwe.</p>
                 </div>
-                <div>
-                    <h4 style="margin-bottom:.5rem;">Company</h4>
-                    <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.4rem;">
-                        <li><a onclick="showPage('about')"
-                                style="color:var(--muted); text-decoration:none; cursor:pointer;">About</a></li>
-                        <li><a onclick="showPage('services')"
-                                style="color:var(--muted); text-decoration:none; cursor:pointer;">Services</a></li>
-                        <li><a onclick="showPage('contact')"
-                                style="color:var(--muted); text-decoration:none; cursor:pointer;">Contact</a></li>
-                    </ul>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <a href="#" onclick="navigate('services'); return false;">Mobile Apps</a>
+                    <a href="#" onclick="navigate('services'); return false;">Web Development</a>
+                    <a href="#" onclick="navigate('services'); return false;">Chatbots</a>
+                    <a href="#" onclick="navigate('services'); return false;">Bill Payments</a>
                 </div>
-                <div>
-                    <h4 style="margin-bottom:.5rem;">Get in touch</h4>
-                    <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.4rem;">
-                        <li style="color:var(--muted);">ceo@softurf.co.zw</li>
-                        <li style="color:var(--muted);">+263 78 267 8233</li>
-                        <li style="color:var(--muted);">Zimbabwe</li>
-                    </ul>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#" onclick="navigate('about'); return false;">About Us</a>
+                    <a href="#" onclick="navigate('contact'); return false;">Contact</a>
+                    <a href="#" onclick="navigate('services'); return false;">Portfolio</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:ceo@softurf.co.zw">ceo@softurf.co.zw</a>
+                    <a href="tel:+263782678233">+263 78 267 8233</a>
+                    <a href="#">Zimbabwe</a>
                 </div>
             </div>
-            <p style="margin-top:1.25rem; color:var(--muted);">&copy; 2024 Softurf Solutions. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Softurf Solutions. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Navigation functionality
-        function showPage(pageId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-
-            // Show selected page
+        function navigate(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-
-            // Close mobile menu if open
+            
+            document.querySelectorAll('.nav a[data-page]').forEach(a => a.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav a[data-page="${pageId}"]`);
+            if (activeLink) activeLink.classList.add('active');
+            
             document.getElementById('navLinks').classList.remove('active');
-
-            // Scroll to top
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
+        
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const service = formData.get('service');
-            const message = formData.get('message');
-
-            // Create success message
-            const successMessage = document.createElement('div');
-            successMessage.style.cssText = `
-                background: #10b981;
-                color: white;
-                padding: 1rem;
-                border-radius: 8px;
-                margin-top: 1rem;
-                text-align: center;
-                font-weight: 600;
-            `;
-            successMessage.textContent = `Thank you, ${name}! Your message has been received. We'll get back to you soon at ${email}.`;
-
-            // Replace form with success message
-            this.style.display = 'none';
-            this.parentNode.appendChild(successMessage);
-
-            // Reset form after 3 seconds and show it again
+            const btn = this.querySelector('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            btn.disabled = true;
             setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
                 this.reset();
-                this.style.display = 'block';
-                successMessage.remove();
             }, 3000);
         });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (e) {
-            const nav = document.querySelector('nav');
-            const navLinks = document.getElementById('navLinks');
-
-            if (!nav.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Smooth scrolling for better UX
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add smooth scroll behavior
-            document.documentElement.style.scrollBehavior = 'smooth';
-
-            // Scroll reveal animations
-            const revealEls = document.querySelectorAll('.reveal');
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                        io.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12 });
-
-            revealEls.forEach(el => io.observe(el));
-
-            // Universal in-page navigation: any anchor with a hash targets a page id
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const hash = this.getAttribute('href');
-                    if (!hash || hash === '#') return;
-                    const targetId = hash.substring(1);
-                    const targetEl = document.getElementById(targetId);
-                    if (targetEl && targetEl.classList.contains('page')) {
-                        e.preventDefault();
-                        showPage(targetId);
-                        // keep hash in URL for shareability
-                        history.replaceState(null, '', hash);
-                    }
-                });
-            });
-        });
     </script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'98f7b77d43dd73de',t:'MTc2MDYxOTM5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
-
 </html>
