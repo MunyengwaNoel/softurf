@@ -1,1189 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softurf Solutions — Mobile Apps, Web Apps, Chatbots & Bill Payments | Zimbabwe</title>
-    <meta name="description" content="Softurf Solutions is Zimbabwe's trusted technology partner for mobile apps, web apps, WhatsApp chatbots, and secure bill payments.">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #818cf8;
-            --dark: #0f172a;
-            --dark-2: #1e293b;
-            --gray: #64748b;
-            --gray-light: #94a3b8;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary), var(--primary-light));
-        }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        ul { list-style: none; }
-        img { max-width: 100%; height: auto; }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* ===== NAVIGATION ===== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--dark);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            height: 90px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 24px;
-            max-width: 1280px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo img {
-            height: 130px;
-            width: auto;
-            object-fit: contain;
-        }
-        
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        
-        .nav a {
-            color: var(--gray-light);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .nav a:hover, .nav a.active { color: var(--white); }
-        
-        .nav-cta {
-            background: var(--gradient);
-            color: white !important;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 700;
-        }
-        
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-        }
-        
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* ===== PAGES ===== */
-        .page { display: none; }
-        .page.active { display: block; }
-        
-        /* ===== HERO SECTION ===== */
-        .hero {
-            background: var(--dark);
-            color: white;
-            padding: 140px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 60%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
-        }
-        
-        .hero-inner {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary-light);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
-        
-        .hero h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--gray-light);
-            margin-bottom: 36px;
-            max-width: 600px;
-        }
-        
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 32px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.4);
-        }
-        
-        /* ===== FEATURES STRIP ===== */
-        .features-strip {
-            background: var(--white);
-            padding: 40px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-        
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-        
-        .feature-item h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        
-        .feature-item p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        /* ===== SECTIONS ===== */
-        section { padding: 100px 0; }
-        
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-        
-        .section-label {
-            display: inline-block;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.75rem;
-            font-weight: 900;
-            margin-bottom: 16px;
-            color: var(--dark);
-        }
-        
-        .section-header p {
-            color: var(--gray);
-            font-size: 1.15rem;
-        }
-        
-        /* ===== SERVICES SECTION ===== */
-        .services-section { background: var(--white); }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-        }
-        
-        .service-card {
-            background: var(--light);
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s;
-        }
-        
-        .service-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.15);
-        }
-        
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--gradient);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            margin-bottom: 24px;
-        }
-        
-        .service-card h3 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        
-        .service-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        /* ===== PLATFORM SECTION ===== */
-        .platform-section { background: var(--dark-2); color: white; }
-        
-        .platform-section .section-header h2 { color: white; }
-        .platform-section .section-header p { color: var(--gray-light); }
-        
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-        }
-        
-        .platform-card {
-            background: var(--dark-2);
-            border-radius: 16px;
-            padding: 32px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-        
-        .platform-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        
-        .platform-card h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .platform-card p {
-            color: var(--gray-light);
-            font-size: 0.95rem;
-        }
-        
-        /* ===== PROCESS SECTION ===== */
-        .process-section { background: var(--light); }
-        
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 24px;
-        }
-        
-        .process-step {
-            text-align: center;
-            position: relative;
-        }
-        
-        .process-step::after {
-            content: '';
-            position: absolute;
-            top: 36px;
-            right: -12px;
-            width: 24px;
-            height: 2px;
-            background: var(--gradient);
-        }
-        
-        .process-step:last-child::after { display: none; }
-        
-        .step-number {
-            width: 72px;
-            height: 72px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin: 0 auto 20px;
-            color: white;
-        }
-        
-        .process-step h4 {
-            font-size: 1rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        
-        .process-step p {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        /* ===== ABOUT SECTION ===== */
-        .about-section { background: var(--white); }
-        
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .about-image {
-            background: var(--gradient);
-            border-radius: 20px;
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .about-image i {
-            font-size: 8rem;
-            color: white;
-            opacity: 0.9;
-        }
-        
-        .about-content h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-        
-        .about-content p {
-            color: var(--gray);
-            margin-bottom: 16px;
-            font-size: 1.05rem;
-        }
-        
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 32px;
-        }
-        
-        .about-stat {
-            text-align: center;
-        }
-        
-        .about-stat .number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .about-stat .label {
-            color: var(--gray);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        /* ===== CTA SECTION ===== */
-        .cta-section {
-            background: var(--primary);
-            padding: 80px 0;
-            text-align: center;
-            color: white;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 16px;
-        }
-        
-        .cta-section p {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-        }
-        
-        .cta-section .btn {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .cta-section .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-        }
-        
-        /* ===== CONTACT SECTION ===== */
-        .contact-section { background: var(--light); }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 48px;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 32px;
-        }
-        
-        .contact-item {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .contact-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-        
-        .contact-item h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        
-        .contact-item p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        .contact-form {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .form-group textarea { resize: vertical; min-height: 140px; }
-        
-        .contact-form .btn { width: 100%; }
-        
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 80px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-        
-        .footer-brand .footer-logo {
-            height: 180px;
-            width: auto;
-            margin-bottom: 20px;
-        }
-        
-        .footer-brand p {
-            color: var(--gray-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-        
-        .footer-col h4 {
-            font-weight: 800;
-            margin-bottom: 24px;
-            font-size: 1.1rem;
-        }
-        
-        .footer-col a {
-            display: block;
-            color: var(--gray-light);
-            margin-bottom: 14px;
-            font-size: 0.95rem;
-        }
-        
-        .footer-col a:hover { color: var(--primary); }
-        
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .footer-bottom p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: var(--dark-2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-light);
-            transition: all 0.3s;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* ===== MOBILE ===== */
-        @media (max-width: 1024px) {
-            .process-grid { grid-template-columns: repeat(3, 1fr); }
-            .process-step::after { display: none; }
-        }
-        
-        @media (max-width: 768px) {
-            .nav { 
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--dark-2);
-                flex-direction: column;
-                padding: 24px;
-                gap: 16px;
-            }
-            .nav.active { display: flex; }
-            .mobile-toggle { display: block; }
-            
-            .logo img { height: 90px; }
-            
-            .hero h1 { font-size: 2.25rem; }
-            .hero { padding: 120px 0 60px; }
-            
-            .features-grid { grid-template-columns: 1fr 1fr; }
-            
-            .section-header h2 { font-size: 2rem; }
-            
-            .about-grid,
-            .contact-grid,
-            .footer-grid { grid-template-columns: 1fr; }
-            
-            .about-stats { grid-template-columns: repeat(3, 1fr); }
-            .about-stat .number { font-size: 1.75rem; }
-            
-            .process-grid { grid-template-columns: repeat(2, 1fr); }
-            
-            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-            
-            .footer-brand .footer-logo { height: 140px; }
-            
-            .hero-btns { flex-direction: column; }
-            .btn { width: 100%; justify-content: center; }
-        }
-        
-        @media (max-width: 480px) {
-            .features-grid { grid-template-columns: 1fr; }
-            .about-stats { grid-template-columns: 1fr; }
-            .process-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Softurf — Software That Moves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --white: #f4f1ed;
+  --cream: #edeae4;
+  --green: #aaee2e;
+  --green-glow: rgba(170,238,46,0.18);
+  --green-dark: #8ccf1f;
+  --charcoal: #141414;
+  --card: #181818;
+  --border: rgba(255,255,255,0.07);
+  --mid: #555;
+  --light: #aaa;
+  --font: 'Nunito', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font);overflow-x:hidden}
+
+/* CURSOR */
+@media(pointer:fine){
+  body{cursor:none}
+  #cur{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s,opacity .18s;mix-blend-mode:difference}
+  #cur.big{width:44px;height:44px;opacity:.55}
+}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9990}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;z-index:500;background:rgba(8,8,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background .3s}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.pulse-wrap{width:38px;height:38px;position:relative;flex-shrink:0}
+.pulse-wrap svg{width:100%;height:100%;overflow:visible}
+.p-ring{fill:none;stroke:var(--green);stroke-width:1.5;transform-origin:19px 19px}
+.p-ring.r1{animation:pring 2.2s ease-out infinite}
+.p-ring.r2{animation:pring 2.2s ease-out .7s infinite}
+@keyframes pring{0%{r:14;opacity:.7}100%{r:26;opacity:0}}
+.logo-name{font-size:18px;font-weight:800;color:var(--white);letter-spacing:-.01em}
+.logo-name span{color:var(--green)}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--light);text-decoration:none;padding:7px 14px;border-radius:8px;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.06)}
+.nav-btn{background:var(--green)!important;color:var(--black)!important;padding:9px 22px!important;border-radius:100px!important;font-weight:800!important;transition:transform .2s,background .2s!important}
+.nav-btn:hover{background:var(--green-dark)!important;transform:scale(1.04)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:501}
+.ham span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-drawer{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(12,12,12,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:24px 24px 32px;flex-direction:column;gap:4px;z-index:499;transform:translateY(-10px);opacity:0;transition:transform .3s,opacity .3s}
+.nav-drawer.open{transform:translateY(0);opacity:1}
+.nav-drawer a{font-size:16px;font-weight:700;color:var(--light);text-decoration:none;padding:14px 16px;border-radius:10px;letter-spacing:.04em;text-transform:uppercase;transition:color .2s,background .2s}
+.nav-drawer a:hover{color:var(--green);background:rgba(170,238,46,.06)}
+.nav-drawer .dcta{background:var(--green);color:var(--black)!important;text-align:center;margin-top:12px;font-weight:900}
+
+/* HERO */
+.hero{min-height:100svh;padding:70px 40px 80px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% 35%,rgba(40,80,5,.55),transparent 65%),radial-gradient(ellipse 35% 45% at 15% 75%,rgba(20,50,3,.4),transparent 55%),var(--black)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(170,238,46,.12) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 75% 75% at 55% 45%,black,transparent 80%)}
+.hero-inner{position:relative;z-index:2;max-width:1100px;width:100%;padding-top:40px}
+.hero-pill{display:inline-flex;align-items:center;gap:10px;background:rgba(170,238,46,.1);border:1px solid rgba(170,238,46,.25);color:var(--green);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:36px;opacity:0;animation:fadeUp .7s .2s forwards}
+.pill-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.6s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-h1{font-size:clamp(52px,8.5vw,128px);line-height:.95;font-weight:900;letter-spacing:-.04em;margin-bottom:32px;opacity:0;animation:fadeUp .7s .38s forwards}
+.hero-h1 em{font-style:italic;color:var(--green)}
+.hero-h1 .outline{-webkit-text-stroke:2px var(--white);color:transparent}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;opacity:0;animation:fadeUp .7s .56s forwards}
+.hero-desc{max-width:420px;font-size:16px;line-height:1.8;color:var(--light);font-weight:400}
+.hero-btns{display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap}
+.btn-green{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:var(--black);font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:15px 32px;border-radius:100px;text-decoration:none;transition:transform .22s,background .22s,box-shadow .22s;box-shadow:0 0 0 0 var(--green-glow)}
+.btn-green:hover{transform:scale(1.04);background:var(--green-dark);box-shadow:0 0 28px 4px var(--green-glow)}
+.btn-outline{display:inline-flex;align-items:center;gap:9px;border:1.5px solid rgba(255,255,255,.2);color:var(--white);font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:15px 32px;border-radius:100px;text-decoration:none;transition:border-color .22s,color .22s}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.4s forwards}
+.hero-scroll span{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mid)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--green),transparent);animation:spulse 2s ease-in-out infinite}
+@keyframes spulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* TICKER */
+.ticker{background:var(--green);overflow:hidden;padding:13px 0}
+.ticker-inner{display:flex;width:max-content;animation:tick 28s linear infinite}
+.ticker-inner span{display:inline-flex;align-items:center;gap:48px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--black);padding:0 48px;white-space:nowrap}
+.ticker-inner span::after{content:'✦';font-size:8px;opacity:.6}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:110px 40px}
+.sec-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:18px}
+.sec-label::before{content:'';width:20px;height:1.5px;background:var(--green)}
+.sec-title{font-size:clamp(36px,5vw,68px);font-weight:900;letter-spacing:-.04em;line-height:1.02;margin-bottom:60px}
+.sec-title em{font-style:italic;color:var(--green)}
+
+/* SERVICES */
+.services-bg{background:var(--charcoal)}
+.svc-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:60px;flex-wrap:wrap}
+.svc-header .sec-title{margin-bottom:0}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border)}
+.srv-card{background:var(--card);padding:44px 36px 36px;position:relative;overflow:hidden;transition:background .3s}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.srv-card:hover{background:#1e1e1e}
+.srv-card:hover::after{transform:scaleX(1)}
+.srv-num{font-size:10px;font-weight:800;letter-spacing:.22em;color:var(--mid);margin-bottom:28px}
+.srv-icon{width:50px;height:50px;border-radius:14px;background:var(--green-glow);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px;transition:background .3s,transform .3s}
+.srv-card:hover .srv-icon{background:rgba(170,238,46,.25);transform:scale(1.08)}
+.srv-name{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.srv-desc{font-size:14px;line-height:1.75;color:var(--light)}
+.srv-link{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;text-decoration:none}
+.srv-card:hover .srv-link{opacity:1;transform:translateY(0)}
+
+/* TECH STRIP */
+.tech-strip{padding:48px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tech-lbl{font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--mid);text-align:center;margin-bottom:28px}
+.tech-logos{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.tech-logo{font-size:13px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.2);text-transform:uppercase;transition:color .3s}
+.tech-logo:hover{color:rgba(255,255,255,.65)}
+
+/* WORK */
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.wi{position:relative;overflow:hidden;border-radius:10px;background:var(--card);cursor:pointer}
+.wi:nth-child(1){grid-column:1/8;min-height:440px}
+.wi:nth-child(2){grid-column:8/13;min-height:440px}
+.wi:nth-child(3){grid-column:1/5;aspect-ratio:4/3}
+.wi:nth-child(4){grid-column:5/9;aspect-ratio:4/3}
+.wi:nth-child(5){grid-column:9/13;aspect-ratio:4/3}
+.wi-bg{position:absolute;inset:0;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.wi:hover .wi-bg{transform:scale(1.07)}
+.wbg1{background:linear-gradient(135deg,#0f2e06,#060e02)}
+.wbg2{background:linear-gradient(135deg,#1a1030,#06040f)}
+.wbg3{background:linear-gradient(135deg,#2e1206,#120601)}
+.wbg4{background:linear-gradient(135deg,#06142e,#02060f)}
+.wbg5{background:linear-gradient(135deg,#0a2e14,#040f08)}
+.wi-gfx{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:90px;opacity:.07;color:var(--white);transition:opacity .4s,transform .4s;user-select:none;font-weight:900;font-style:italic}
+.wi:hover .wi-gfx{opacity:0;transform:translate(-50%,-50%) scale(1.3)}
+.wi-tag{position:absolute;top:24px;left:24px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.wi-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.2) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.wi:hover .wi-info{opacity:1;transform:translateY(0)}
+.wi-cat{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.wi-name{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+
+/* ABOUT */
+.about-sec{background:var(--charcoal);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:110px 40px}
+.about-visual{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:var(--card)}
+.about-vis-inner{position:absolute;inset:0;background:radial-gradient(ellipse 80% 75% at 50% 50%,rgba(170,238,46,.1),transparent 70%),linear-gradient(145deg,#0f2006,#080808);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.big-s-gfx{font-size:340px;font-weight:900;font-style:italic;color:rgba(170,238,46,.05);line-height:1;user-select:none;animation:floatS 9s ease-in-out infinite}
+@keyframes floatS{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-22px) rotate(3deg)}}
+.about-badge{position:absolute;bottom:28px;right:28px;background:var(--green);color:var(--black);font-size:12px;font-weight:800;padding:11px 18px;border-radius:100px;white-space:nowrap}
+.about-pill{position:absolute;top:28px;left:28px;border:1.5px solid rgba(170,238,46,.3);color:var(--green);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:8px 14px;border-radius:100px}
+.about-text .sec-title{margin-bottom:24px}
+.about-body{font-size:15px;line-height:1.85;color:var(--light);margin-bottom:44px}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:44px}
+.stat-num{font-size:46px;font-weight:900;font-style:italic;color:var(--green);line-height:1;display:block}
+.stat-lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-top:4px}
+
+/* PROCESS */
+.proc-sec{background:#0e0e0e}
+.proc-list{border-top:1px solid var(--border)}
+.proc-row{border-bottom:1px solid var(--border);padding:36px 0;display:grid;grid-template-columns:64px 1fr 1fr auto;align-items:center;gap:36px;transition:padding .25s,background .25s}
+.proc-row:hover{background:rgba(255,255,255,.015);padding-left:16px;padding-right:16px;margin:0 -16px;border-radius:8px}
+.proc-n{font-size:40px;font-weight:900;font-style:italic;color:rgba(170,238,46,.25);line-height:1}
+.proc-name{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.proc-desc{font-size:13px;line-height:1.75;color:var(--mid)}
+.proc-badge{background:rgba(170,238,46,.1);color:var(--green);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:100px;white-space:nowrap}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--charcoal)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:36px;border-radius:12px;transition:border-color .3s,transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.testi-card:hover{border-color:rgba(170,238,46,.3);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.testi-stars{color:var(--green);font-size:13px;letter-spacing:2px;margin-bottom:20px}
+.testi-q{font-size:16px;font-style:italic;font-weight:300;line-height:1.7;color:var(--cream);margin-bottom:28px;flex:1}
+.testi-author{display:flex;align-items:center;gap:13px}
+.testi-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--black);flex-shrink:0}
+.av1{background:var(--green)}.av2{background:#60e3f5}.av3{background:#f5c542}
+.testi-name{font-size:14px;font-weight:800}
+.testi-role{font-size:12px;color:var(--mid);margin-top:2px}
+
+/* FAQ */
+.faq-sec{background:var(--black)}
+.faq-wrap{max-width:760px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;color:var(--white);font-family:var(--font);font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:space-between;padding:26px 0;cursor:pointer;text-align:left;gap:20px;transition:color .2s}
+.faq-q:hover{color:var(--green)}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:var(--green);transition:transform .3s,background .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--green-glow)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+.faq-a-inner{padding:0 0 24px;font-size:15px;line-height:1.8;color:var(--light)}
+
+/* CTA */
+.cta-sec{background:var(--green);padding:110px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(255,255,255,.2),transparent 60%)}
+.cta-inner{position:relative;z-index:1}
+.cta-h{font-size:clamp(48px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.95;color:var(--black);margin-bottom:28px}
+.cta-h em{font-style:italic}
+.cta-sub{font-size:17px;color:rgba(0,0,0,.55);max-width:460px;margin:0 auto 44px;line-height:1.7}
+.btn-black{display:inline-flex;align-items:center;gap:9px;background:var(--black);color:var(--green);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:17px 42px;border-radius:100px;text-decoration:none;transition:transform .22s,background .22s}
+.btn-black:hover{transform:scale(1.04);background:#1c1c1c}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:80px 40px 36px;border-top:1px solid var(--border)}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:52px;margin-bottom:64px}
+.foot-brand-name{font-size:22px;font-weight:800;color:var(--white);letter-spacing:-.01em;display:block;margin-bottom:16px;text-decoration:none}
+.foot-brand-name span{color:var(--green)}
+.foot-tagline{font-size:14px;line-height:1.75;color:var(--mid);max-width:270px;margin-bottom:28px}
+.foot-social{display:flex;gap:10px}
+.soc{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--light);text-decoration:none;transition:border-color .2s,color .2s,background .2s}
+.soc:hover{border-color:var(--green);color:var(--green);background:var(--green-glow)}
+.foot-col-ttl{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--light);margin-bottom:20px}
+.foot-links{list-style:none}
+.foot-links li{margin-bottom:10px}
+.foot-links a{font-size:14px;color:var(--mid);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--green)}
+.foot-bot{border-top:1px solid var(--border);padding-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-copy{font-size:12px;color:var(--mid)}
+.foot-copy em{color:var(--green);font-style:normal}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal.on{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .srv-grid{grid-template-columns:repeat(2,1fr)}
+  .about-sec{grid-template-columns:1fr;padding:80px 32px}
+  .about-visual{display:none}
+  .proc-row{grid-template-columns:52px 1fr;gap:20px}
+  .proc-desc,.proc-badge{display:none}
+  .foot-top{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;height:64px}
+  .nav-links{display:none}
+  .ham{display:flex}
+  .nav-drawer{display:flex}
+  .hero{padding:64px 20px 70px}
+  .hero-h1{font-size:clamp(44px,12vw,72px)}
+  .hero-row{flex-direction:column;align-items:flex-start;gap:24px}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn-green,.btn-outline{justify-content:center;padding:16px 28px;width:100%}
+  .hero-scroll{display:none}
+  .sec{padding:72px 20px}
+  .sec-title{font-size:clamp(32px,9vw,52px)}
+  .svc-header{flex-direction:column;align-items:flex-start}
+  .svc-header .btn-outline{width:100%;justify-content:center}
+  .srv-grid{grid-template-columns:1fr;gap:1px}
+  .tech-strip{padding:40px 20px}
+  .tech-logos{gap:20px}
+  .wi:nth-child(1),.wi:nth-child(2){grid-column:1/-1;min-height:260px}
+  .wi:nth-child(3),.wi:nth-child(4),.wi:nth-child(5){grid-column:1/-1;aspect-ratio:16/9}
+  .wi-info{opacity:1;transform:translateY(0)}
+  .about-sec{padding:72px 20px;gap:40px}
+  .stats-row{gap:16px}
+  .stat-num{font-size:34px}
+  .proc-row{grid-template-columns:44px 1fr;gap:16px;padding:28px 0}
+  .proc-name{font-size:16px}
+  .testi-grid{grid-template-columns:1fr}
+  .faq-sec{padding:72px 20px}
+  .faq-q{font-size:15px}
+  .cta-sec{padding:80px 20px}
+  footer{padding:60px 20px 28px}
+  .foot-top{grid-template-columns:1fr;gap:36px}
+  .foot-bot{flex-direction:column;text-align:center}
+}
+@media(max-width:420px){
+  .hero-h1{font-size:40px}
+  .stats-row{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-inner">
-            <a href="#" class="logo" onclick="navigate('home'); return false;">
-                <img src="softurf_updated.png" alt="Softurf">
-            </a>
-            <nav class="nav" id="navLinks">
-                <a href="#" class="active" data-page="home" onclick="navigate('home'); return false;">Home</a>
-                <a href="#" data-page="services" onclick="navigate('services'); return false;">Services</a>
-                <a href="#" data-page="about" onclick="navigate('about'); return false;">About</a>
-                <a href="#" data-page="contact" onclick="navigate('contact'); return false;">Contact</a>
-                <a href="#" class="nav-cta" onclick="navigate('contact'); return false;">Get Started</a>
-            </nav>
-            <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
 
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
-        <section class="hero">
-            <div class="container">
-                <div class="hero-inner">
-                    <span class="hero-badge">Trusted Technology Partner in Zimbabwe</span>
-                    <h1>World-Class <span>Mobile Apps, Web Apps & Chatbots</span> for Your Business</h1>
-                    <p>We design and build fast, secure applications plus trusted bill payment services for ZESA, DStv, and more across Zimbabwe.</p>
-                    <div class="hero-btns">
-                        <button class="btn btn-primary" onclick="navigate('services')">
-                            Explore Services <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-outline" onclick="navigate('contact')">
-                            Talk to Us <i class="fas fa-comments"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div id="cur"></div>
 
-        <section class="features-strip">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-                        <div>
-                            <h4>MVP in 6-8 Weeks</h4>
-                            <p>Fast delivery of minimum viable products</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                        <div>
-                            <h4>Secure & Reliable</h4>
-                            <p>Bank-grade security for your solutions</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
-                        <div>
-                            <h4>24/7 Support</h4>
-                            <p>Round-the-clock customer assistance</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-hand-holding-dollar"></i></div>
-                        <div>
-                            <h4>Trusted Bank Agents</h4>
-                            <p>Official bill payment services</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="services-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-label">What We Offer</span>
-                    <h2>Our Services</h2>
-                    <p>Comprehensive solutions tailored to transform your business</p>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">📱</div>
-                        <h3>Mobile App Development</h3>
-                        <p>Native and cross-platform apps for Android and iOS with modern UX and reliable performance.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🕸️</div>
-                        <h3>Web Applications</h3>
-                        <p>Custom web apps and responsive websites built with modern frameworks for scalability.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🤖</div>
-                        <h3>Chatbot Development</h3>
-                        <p>WhatsApp and Messenger bots that automate customer interactions and support.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">⚡</div>
-                        <h3>ZESA Payments</h3>
-                        <p>Instant electricity token purchases and meter top-ups. Quick, reliable, and hassle-free.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">📺</div>
-                        <h3>DStv & TV Payments</h3>
-                        <p>Pay your DStv subscriptions and reconnect services easily through our trusted agency.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">💰</div>
-                        <h3>Mobile Money</h3>
-                        <p>EcoCash, OneMoney, and other mobile money services for convenient transactions.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="platform-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-label" style="color: #a5b4fc;">Platforms</span>
-                    <h2>Development for Every Platform</h2>
-                    <p>We build apps that run flawlessly across all platforms your customers use</p>
-                </div>
-                <div class="platform-grid">
-                    <div class="platform-card">
-                        <h3><i class="fab fa-apple"></i> iOS Development</h3>
-                        <p>Native iOS applications for iPhone and iPad with Swift, featuring biometric auth, Apple Pay, and more.</p>
-                    </div>
-                    <div class="platform-card">
-                        <h3><i class="fab fa-android"></i> Android Development</h3>
-                        <p>Native Android apps using Kotlin and Java following Material Design guidelines for smooth performance.</p>
-                    </div>
-                    <div class="platform-card">
-                        <h3><i class="fas fa-code"></i> Cross-Platform</h3>
-                        <p>Flutter and React Native apps that work on both iOS and Android from a single codebase.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="process-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-label">Our Process</span>
-                    <h2>How We Work</h2>
-                    <p>A transparent, agile approach from discovery to deployment</p>
-                </div>
-                <div class="process-grid">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h4>Discovery</h4>
-                        <p>Understand your goals and requirements</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h4>Strategy</h4>
-                        <p>Plan architecture and tech stack</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h4>Design</h4>
-                        <p>Create UI/UX wireframes and prototypes</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h4>Develop</h4>
-                        <p>Build using agile methodology</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">5</div>
-                        <h4>Test & Launch</h4>
-                        <p>Rigorous QA and deployment</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">6</div>
-                        <h4>Support</h4>
-                        <p>Ongoing maintenance and updates</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="container">
-                <h2>Ready to Transform Your Business?</h2>
-                <p>Let's discuss how we can help you achieve your digital goals</p>
-                <button class="btn" onclick="navigate('contact')">
-                    Start a Conversation <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </section>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="pulse-wrap">
+      <svg viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+        <circle class="p-ring r1" cx="19" cy="19" r="14"/>
+        <circle class="p-ring r2" cx="19" cy="19" r="14"/>
+        <circle cx="19" cy="19" r="14" fill="#aaee2e"/>
+        <text x="19" y="24" text-anchor="middle" fill="#080808" font-family="Nunito,sans-serif" font-size="14" font-weight="900">S</text>
+      </svg>
     </div>
+    <span class="logo-name">Soft<span>urf</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-btn">Start a project</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <!-- SERVICES PAGE -->
-    <div id="services" class="page">
-        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
-            <div class="container">
-                <div class="hero-inner">
-                    <span class="hero-badge">Our Expertise</span>
-                    <h1>Professional <span>Services</span></h1>
-                    <p>End-to-end technology solutions and financial services for Zimbabwe businesses</p>
-                </div>
-            </div>
-        </section>
+<nav class="nav-drawer" id="drawer">
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#process">Process</a>
+  <a href="#contact" class="dcta">Start a project →</a>
+</nav>
 
-        <section class="services-section">
-            <div class="container">
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">📱</div>
-                        <h3>Mobile App Development</h3>
-                        <p>High-performance Android and iOS apps with intuitive interfaces, secure authentication, and smooth performance across all devices.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🕸️</div>
-                        <h3>Web Applications</h3>
-                        <p>Custom web apps and responsive websites built with modern frameworks. SEO-friendly, cloud-ready, and designed to scale.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🤖</div>
-                        <h3>Chatbot Development</h3>
-                        <p>WhatsApp and Messenger bots that automate customer interactions, reduce response times, and integrate with your CRM.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">⚡</div>
-                        <h3>ZESA Payments</h3>
-                        <p>Instant electricity token purchases and meter top-ups. Quick, reliable, and hassle-free transactions.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">📺</div>
-                        <h3>DStv & TV Payments</h3>
-                        <p>Pay your DStv subscriptions and reconnect services easily through our trusted agency.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🏫</div>
-                        <h3>School Fees Payments</h3>
-                        <p>Secure school fee payments for institutions across Zimbabwe with instant confirmation.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">💰</div>
-                        <h3>Mobile Money</h3>
-                        <p>EcoCash, OneMoney, and other mobile money services for convenient transactions.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🎨</div>
-                        <h3>UI/UX Design</h3>
-                        <p>Beautiful, user-centered designs that enhance engagement and create memorable experiences.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-pill">
+      <span class="pill-dot"></span>
+      Harare, Zimbabwe — Building Africa's digital future
     </div>
-
-    <!-- ABOUT PAGE -->
-    <div id="about" class="page">
-        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
-            <div class="container">
-                <div class="hero-inner">
-                    <span class="hero-badge">Who We Are</span>
-                    <h1>About <span>Softurf</span></h1>
-                    <p>Your trusted technology partner in Zimbabwe</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-image">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="about-content">
-                        <h2>Building Digital Solutions for Zimbabwe</h2>
-                        <p>Softurf Solutions is a Zimbabwean technology company dedicated to helping businesses and individuals succeed through innovative software and reliable services.</p>
-                        <p>We combine technical expertise with a deep understanding of the local market to deliver solutions that truly work for our clients.</p>
-                        <p>Beyond software, we're trusted bank agents providing essential bill payment services to communities across Zimbabwe.</p>
-                        <div class="about-stats">
-                            <div class="about-stat">
-                                <div class="number">50+</div>
-                                <div class="label">Projects Completed</div>
-                            </div>
-                            <div class="about-stat">
-                                <div class="number">30+</div>
-                                <div class="label">Happy Clients</div>
-                            </div>
-                            <div class="about-stat">
-                                <div class="number">5+</div>
-                                <div class="label">Years Experience</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <h1 class="hero-h1">
+      Software<br>
+      that <em>moves</em><br>
+      <span class="outline">the world.</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-desc">We design and engineer digital products — web apps, mobile platforms, and enterprise systems — that help ambitious African businesses compete on a global stage.</p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-green">See our work ↗</a>
+        <a href="#contact" class="btn-outline">Let's talk</a>
+      </div>
     </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-    <!-- CONTACT PAGE -->
-    <div id="contact" class="page">
-        <section class="hero" style="min-height: auto; padding: 120px 0 60px;">
-            <div class="container">
-                <div class="hero-inner">
-                    <span class="hero-badge">Get In Touch</span>
-                    <h1>Contact <span>Us</span></h1>
-                    <p>Ready to start your project? Let's talk about how we can help.</p>
-                </div>
-            </div>
-        </section>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span>Web Development</span><span>Mobile Apps</span><span>ERP Systems</span><span>UI / UX Design</span><span>Cloud &amp; DevOps</span><span>AI &amp; Automation</span><span>Digital Strategy</span><span>Branding</span><span>Web Development</span><span>Mobile Apps</span><span>ERP Systems</span><span>UI / UX Design</span><span>Cloud &amp; DevOps</span><span>AI &amp; Automation</span><span>Digital Strategy</span><span>Branding</span>
+  </div>
+</div>
 
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <h3>Reach Out</h3>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>ceo@softurf.co.zw</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+263 78 267 8233</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Serving clients across Zimbabwe</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
-                            <div>
-                                <h4>Business Hours</h4>
-                                <p>Mon-Fri: 8am - 5pm<br>Sat: 9am - 1pm</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" name="from_name" required placeholder="John Doe">
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" name="from_email" required placeholder="john@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phone" placeholder="+263 XX XXX XXXX">
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" required placeholder="Tell us about your project..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            Send Message <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
+<!-- SERVICES -->
+<section id="services" class="sec services-bg">
+  <div class="svc-header">
+    <div>
+      <p class="sec-label reveal">What we do</p>
+      <h2 class="sec-title reveal">Our <em>capabilities</em></h2>
     </div>
+    <a href="#contact" class="btn-outline reveal">All services ↗</a>
+  </div>
+  <div class="srv-grid">
+    <div class="srv-card reveal">
+      <div class="srv-num">01</div>
+      <div class="srv-icon">🌐</div>
+      <h3 class="srv-name">Web Development</h3>
+      <p class="srv-desc">Blazing-fast websites and web applications built with modern frameworks. From landing pages to complex SaaS platforms — pixel-perfect and performance-first.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-num">02</div>
+      <div class="srv-icon">📱</div>
+      <h3 class="srv-name">Mobile Applications</h3>
+      <p class="srv-desc">Native and cross-platform mobile apps for iOS and Android. Built for the way your customers actually live their lives across Africa and beyond.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-num">03</div>
+      <div class="srv-icon">⚙️</div>
+      <h3 class="srv-name">ERP &amp; Business Systems</h3>
+      <p class="srv-desc">Custom enterprise solutions that streamline operations, reduce waste, and deliver real-time visibility across your entire business — built for Africa.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-num">04</div>
+      <div class="srv-icon">🎨</div>
+      <h3 class="srv-name">UI / UX Design</h3>
+      <p class="srv-desc">Interfaces that users love. Research-driven design that removes friction and creates experiences people come back to, again and again.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-num">05</div>
+      <div class="srv-icon">☁️</div>
+      <h3 class="srv-name">Cloud &amp; DevOps</h3>
+      <p class="srv-desc">Rock-solid infrastructure on AWS, Azure, and GCP. Architecture, CI/CD pipelines, and monitoring that scale seamlessly with your ambitions.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+    <div class="srv-card reveal">
+      <div class="srv-num">06</div>
+      <div class="srv-icon">🤖</div>
+      <h3 class="srv-name">AI &amp; Automation</h3>
+      <p class="srv-desc">Practical AI integrations and workflow automation that give your team superpowers — intelligent chatbots, smart analytics, and process automation.</p>
+      <a href="#contact" class="srv-link">Explore →</a>
+    </div>
+  </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="softurf_updated.png" alt="Softurf" class="footer-logo">
-                    <p>Your trusted partner for mobile apps, web apps, chatbots, and bill payment services in Zimbabwe.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <a href="#" onclick="navigate('services'); return false;">Mobile Apps</a>
-                    <a href="#" onclick="navigate('services'); return false;">Web Development</a>
-                    <a href="#" onclick="navigate('services'); return false;">Chatbots</a>
-                    <a href="#" onclick="navigate('services'); return false;">Bill Payments</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <a href="#" onclick="navigate('about'); return false;">About Us</a>
-                    <a href="#" onclick="navigate('contact'); return false;">Contact</a>
-                    <a href="#" onclick="navigate('services'); return false;">Portfolio</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <a href="mailto:ceo@softurf.co.zw">ceo@softurf.co.zw</a>
-                    <a href="tel:+263782678233">+263 78 267 8233</a>
-                    <a href="#">Zimbabwe</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Softurf Solutions. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!-- TECH STRIP -->
+<div class="tech-strip">
+  <p class="tech-lbl">Technologies we love</p>
+  <div class="tech-logos">
+    <span class="tech-logo">React</span>
+    <span class="tech-logo">Next.js</span>
+    <span class="tech-logo">Node.js</span>
+    <span class="tech-logo">Python</span>
+    <span class="tech-logo">Flutter</span>
+    <span class="tech-logo">Laravel</span>
+    <span class="tech-logo">AWS</span>
+    <span class="tech-logo">Firebase</span>
+    <span class="tech-logo">PostgreSQL</span>
+    <span class="tech-logo">Figma</span>
+  </div>
+</div>
 
-    <script>
-        function navigate(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            
-            document.querySelectorAll('.nav a[data-page]').forEach(a => a.classList.remove('active'));
-            const activeLink = document.querySelector(`.nav a[data-page="${pageId}"]`);
-            if (activeLink) activeLink.classList.add('active');
-            
-            document.getElementById('navLinks').classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        (function() {
-            emailjs.init("G4HMrNj5WjEnvP_d4");
-        })();
-        
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            const originalHTML = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-            
-            emailjs.sendForm('service_uh7fa3k', 'template_4yiacgn', this)
-                .then(function() {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                    document.getElementById('contactForm').reset();
-                    setTimeout(() => {
-                        btn.innerHTML = originalHTML;
-                        btn.disabled = false;
-                    }, 3000);
-                }, function(error) {
-                    btn.innerHTML = '<i class="fas fa-times"></i> Failed. Try Again';
-                    setTimeout(() => {
-                        btn.innerHTML = originalHTML;
-                        btn.disabled = false;
-                    }, 3000);
-                });
-        });
-    </script>
+<!-- WORK -->
+<section id="work" class="sec">
+  <div class="svc-header">
+    <div>
+      <p class="sec-label reveal">Portfolio</p>
+      <h2 class="sec-title reveal">Selected <em>work</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline reveal">All projects ↗</a>
+  </div>
+  <div class="work-grid">
+    <div class="wi reveal">
+      <div class="wi-bg wbg1"></div>
+      <span class="wi-tag">Fintech</span>
+      <span class="wi-gfx">$</span>
+      <div class="wi-info"><span class="wi-cat">Web App · 2024</span><h3 class="wi-name">ZimPay — Digital Payment Platform</h3></div>
+    </div>
+    <div class="wi reveal">
+      <div class="wi-bg wbg2"></div>
+      <span class="wi-tag">Healthcare</span>
+      <span class="wi-gfx">+</span>
+      <div class="wi-info"><span class="wi-cat">Mobile App · 2024</span><h3 class="wi-name">MediTrack — Patient Management System</h3></div>
+    </div>
+    <div class="wi reveal">
+      <div class="wi-bg wbg3"></div>
+      <span class="wi-tag">Agriculture</span>
+      <span class="wi-gfx">⬡</span>
+      <div class="wi-info"><span class="wi-cat">ERP · 2023</span><h3 class="wi-name">FarmOps — Agricultural ERP</h3></div>
+    </div>
+    <div class="wi reveal">
+      <div class="wi-bg wbg4"></div>
+      <span class="wi-tag">Retail</span>
+      <span class="wi-gfx">◈</span>
+      <div class="wi-info"><span class="wi-cat">E-commerce · 2023</span><h3 class="wi-name">ShopZim — National Retail Platform</h3></div>
+    </div>
+    <div class="wi reveal">
+      <div class="wi-bg wbg5"></div>
+      <span class="wi-tag">Education</span>
+      <span class="wi-gfx">✦</span>
+      <div class="wi-info"><span class="wi-cat">Platform · 2023</span><h3 class="wi-name">EduZim — Learning Management System</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div id="about" class="about-sec">
+  <div class="about-visual reveal">
+    <div class="about-vis-inner">
+      <span class="big-s-gfx">S</span>
+    </div>
+    <span class="about-pill">Est. Harare, Zimbabwe</span>
+    <span class="about-badge">100% client satisfaction ↑</span>
+  </div>
+  <div class="about-text">
+    <p class="sec-label reveal">About us</p>
+    <h2 class="sec-title reveal">We build<br>the <em>future</em><br>of Africa.</h2>
+    <p class="about-body reveal">Softurf is a full-service digital product studio based in Harare, Zimbabwe. We've helped startups, corporates, and government bodies across the region transform their operations through smart, beautiful software.<br><br>We don't just write code — we become embedded partners who care about your outcomes as much as you do.</p>
+    <div class="stats-row reveal">
+      <div><span class="stat-num">50+</span><span class="stat-lbl">Projects delivered</span></div>
+      <div><span class="stat-num">8+</span><span class="stat-lbl">Years in market</span></div>
+      <div><span class="stat-num">30+</span><span class="stat-lbl">Happy clients</span></div>
+    </div>
+    <a href="#contact" class="btn-green reveal">Work with us ↗</a>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process" class="sec proc-sec">
+  <p class="sec-label reveal">How we work</p>
+  <h2 class="sec-title reveal">Our <em>process</em></h2>
+  <div class="proc-list">
+    <div class="proc-row reveal">
+      <span class="proc-n">01</span>
+      <span class="proc-name">Discovery &amp; Strategy</span>
+      <span class="proc-desc">We dig deep into your business goals, users, and competitive landscape before writing a single line of code.</span>
+      <span class="proc-badge">1–2 weeks</span>
+    </div>
+    <div class="proc-row reveal">
+      <span class="proc-n">02</span>
+      <span class="proc-name">Design &amp; Prototype</span>
+      <span class="proc-desc">Interactive prototypes and visual design that let you feel the product before it's built — iterate fast, de-risk early.</span>
+      <span class="proc-badge">2–4 weeks</span>
+    </div>
+    <div class="proc-row reveal">
+      <span class="proc-n">03</span>
+      <span class="proc-name">Build &amp; Engineer</span>
+      <span class="proc-desc">Agile development with bi-weekly demos. You see real progress — not a black box that opens at the deadline.</span>
+      <span class="proc-badge">4–16 weeks</span>
+    </div>
+    <div class="proc-row reveal">
+      <span class="proc-n">04</span>
+      <span class="proc-name">Launch &amp; Grow</span>
+      <span class="proc-desc">QA, deployment, training, and ongoing support. We don't disappear — we're with you as you scale and evolve.</span>
+      <span class="proc-badge">Ongoing</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testi-sec">
+  <p class="sec-label reveal">Client love</p>
+  <h2 class="sec-title reveal">What people <em>say</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"Softurf completely transformed how we manage our operations. The ERP they built cut our admin time in half — we wish we'd done this years ago."</p>
+      <div class="testi-author">
+        <div class="testi-av av1">TM</div>
+        <div><div class="testi-name">Tendai Moyo</div><div class="testi-role">CEO, Moyo Agribusiness</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"Exceptional team. They understood our vision from day one and delivered a mobile app that our users genuinely love. Communication was flawless throughout."</p>
+      <div class="testi-author">
+        <div class="testi-av av2">SN</div>
+        <div><div class="testi-name">Simbai Ncube</div><div class="testi-role">Founder, HealthFirst Zimbabwe</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"The new website drove a 3x increase in enquiries in the first month. Softurf doesn't just build — they think strategically about your whole business."</p>
+      <div class="testi-author">
+        <div class="testi-av av3">RC</div>
+        <div><div class="testi-name">Rudo Chigumba</div><div class="testi-role">Marketing Director, ZimRetail</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec">
+  <p class="sec-label reveal" style="justify-content:center">FAQ</p>
+  <h2 class="sec-title reveal" style="text-align:center;margin-bottom:52px">Common <em>questions</em></h2>
+  <div class="faq-wrap">
+    <div class="faq-item reveal">
+      <button class="faq-q">How long does a typical project take? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">It depends on scope — a landing website can be live in 2–3 weeks, while a complex ERP or mobile app typically takes 3–5 months. We always provide a detailed timeline during discovery so there are no surprises.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">Do you work with startups or only established businesses? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Both! We love working with early-stage startups who need to move fast, and we equally enjoy partnering with established businesses on transformation projects. Our process adapts to your stage and budget.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">What does your pricing look like? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">We work on fixed-scope projects and ongoing retainers. Every project starts with a free discovery call where we give you a transparent, itemised quote. No hidden fees, ever.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">Can you maintain and support our product after launch? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Absolutely. We offer flexible support and maintenance retainers — from bug fixes and security updates to new feature development. We're in it for the long haul with our clients.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">Do you only work with Zimbabwean clients? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Not at all — we work with clients across Africa and internationally. Our roots are in Zimbabwe and we're proud of that, but great software has no borders.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-sec">
+  <div class="cta-inner">
+    <h2 class="cta-h">Ready<br>when <em>you</em> are.</h2>
+    <p class="cta-sub">Let's talk about your project. No obligation — just a conversation about what you want to build.</p>
+    <a href="mailto:hello@softurf.co.zw" class="btn-black">Book a free call ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <a href="#" class="foot-brand-name">Soft<span>urf</span></a>
+      <p class="foot-tagline">Building world-class digital products from the heart of Africa. Proudly based in Harare, Zimbabwe.</p>
+      <div class="foot-social">
+        <a href="#" class="soc">𝕏</a>
+        <a href="#" class="soc">in</a>
+        <a href="#" class="soc">ig</a>
+        <a href="#" class="soc">fb</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot-col-ttl">Services</p>
+      <ul class="foot-links">
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Mobile Apps</a></li>
+        <li><a href="#">ERP Systems</a></li>
+        <li><a href="#">UI/UX Design</a></li>
+        <li><a href="#">Cloud &amp; DevOps</a></li>
+        <li><a href="#">AI &amp; Automation</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-ttl">Company</p>
+      <ul class="foot-links">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Our work</a></li>
+        <li><a href="#">Process</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-ttl">Contact</p>
+      <ul class="foot-links">
+        <li><a href="mailto:hello@softurf.co.zw">hello@softurf.co.zw</a></li>
+        <li><a href="#">+263 (0) — — — —</a></li>
+        <li><a href="#">Harare, Zimbabwe</a></li>
+        <li><a href="#">Book a call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <p class="foot-copy">© 2026 <em>Softurf (Pvt) Ltd</em>. All rights reserved.</p>
+    <p class="foot-copy">Designed with ♥ in Harare.</p>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cur');
+if(window.matchMedia('(pointer:fine)').matches && cur){
+  document.addEventListener('mousemove',e=>{
+    cur.style.left=e.clientX+'px';
+    cur.style.top=e.clientY+'px';
+  });
+  document.querySelectorAll('a,button,.srv-card,.wi,.proc-row,.testi-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+}
+
+// HAMBURGER
+const ham=document.getElementById('ham');
+const drawer=document.getElementById('drawer');
+ham.addEventListener('click',()=>{
+  ham.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  ham.classList.remove('open');
+  drawer.classList.remove('open');
+}));
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const siblings=[...e.target.parentElement.querySelectorAll('.reveal:not(.on)')];
+      const i=siblings.indexOf(e.target);
+      e.target.style.transitionDelay=Math.min(i*0.07,0.42)+'s';
+      e.target.classList.add('on');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const ans=item.querySelector('.faq-a');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight='0';
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      ans.style.maxHeight=ans.scrollHeight+'px';
+    }
+  });
+});
+
+// NAV scroll tint
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.background=
+    window.scrollY>40?'rgba(8,8,8,.96)':'rgba(8,8,8,.85)';
+},{ passive:true });
+</script>
 </body>
 </html>
