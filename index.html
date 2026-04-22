@@ -275,6 +275,311 @@ footer{background:var(--charcoal);padding:80px 40px 36px;border-top:1px solid va
   .hero-h1{font-size:40px}
   .stats-row{grid-template-columns:1fr 1fr}
 }
+
+
+:root {
+  --black: #080808;
+  --white: #f4f1ed;
+  --cream: #edeae4;
+  --green: #aaee2e;
+  --green-glow: rgba(170,238,46,0.18);
+  --green-dark: #8ccf1f;
+  --charcoal: #141414;
+  --card: #181818;
+  --border: rgba(255,255,255,0.07);
+  --mid: #555;
+  --light: #aaa;
+  --font: 'Nunito', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font);overflow-x:hidden}
+ 
+/* WORK SECTION */
+.sec{padding:110px 40px}
+.sec-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:18px}
+.sec-label::before{content:'';width:20px;height:1.5px;background:var(--green)}
+.sec-title{font-size:clamp(36px,5vw,68px);font-weight:900;letter-spacing:-.04em;line-height:1.02;margin-bottom:60px}
+.sec-title em{font-style:italic;color:var(--green)}
+.svc-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:60px;flex-wrap:wrap}
+.svc-header .sec-title{margin-bottom:0}
+.btn-outline{display:inline-flex;align-items:center;gap:9px;border:1.5px solid rgba(255,255,255,.2);color:var(--white);font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:15px 32px;border-radius:100px;text-decoration:none;transition:border-color .22s,color .22s}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+ 
+/* WORK GRID */
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.wi{position:relative;overflow:hidden;border-radius:10px;background:var(--card);cursor:pointer}
+.wi:nth-child(1){grid-column:1/8;min-height:440px}
+.wi:nth-child(2){grid-column:8/13;min-height:440px}
+.wi:nth-child(3){grid-column:1/5;aspect-ratio:4/3}
+.wi:nth-child(4){grid-column:5/9;aspect-ratio:4/3}
+.wi:nth-child(5){grid-column:9/13;aspect-ratio:4/3}
+.wi-bg{position:absolute;inset:0;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.wi:hover .wi-bg{transform:scale(1.04)}
+.wi-tag{position:absolute;top:20px;left:20px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:10;background:rgba(0,0,0,.3);backdrop-filter:blur(8px);padding:5px 10px;border-radius:100px;border:1px solid rgba(255,255,255,.1)}
+.wi-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.5) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;z-index:10;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.wi:hover .wi-info{opacity:1;transform:translateY(0)}
+.wi-cat{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.wi-name{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+ 
+/* Always-visible label for cards without hover-info */
+.wi-label-always{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent);padding:24px;z-index:10}
+.wi-label-always .wi-cat{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.wi-label-always .wi-name{font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+ 
+/* MOCKUP CONTAINERS */
+.mockup-wrap{position:absolute;inset:0;overflow:hidden}
+ 
+/* ─── ZIMPAY DASHBOARD MOCKUP ─── */
+.zimpay-mock{
+  position:absolute;
+  top:16px; left:50%; 
+  transform:translateX(-50%);
+  width:88%;
+  background:#0d1117;
+  border-radius:10px 10px 0 0;
+  border:1px solid rgba(255,255,255,.08);
+  border-bottom:none;
+  overflow:hidden;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.wi:nth-child(1):hover .zimpay-mock{transform:translateX(-50%) translateY(-8px)}
+.zp-titlebar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#161b22;border-bottom:1px solid rgba(255,255,255,.06)}
+.zp-dot{width:8px;height:8px;border-radius:50%}
+.zp-dot.r{background:#ff5f57}.zp-dot.y{background:#febc2e}.zp-dot.g{background:#28c840}
+.zp-url{margin-left:8px;font-size:9px;color:rgba(255,255,255,.25);font-family:monospace;background:rgba(255,255,255,.04);padding:3px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.06)}
+.zp-body{display:flex;height:380px}
+.zp-sidebar{width:48px;background:#0d1117;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:12px}
+.zp-sb-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:.2s}
+.zp-sb-icon.active{background:rgba(170,238,46,.15)}
+.zp-main{flex:1;padding:14px;overflow:hidden;background:#0d1117}
+.zp-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.zp-greeting{font-size:11px;font-weight:700;color:#fff}
+.zp-greeting span{color:#aaee2e}
+.zp-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#aaee2e,#5ea600);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#000}
+.zp-bal-card{background:linear-gradient(135deg,#1a2e0a,#0d1f05);border:1px solid rgba(170,238,46,.2);border-radius:8px;padding:12px;margin-bottom:10px;position:relative;overflow:hidden}
+.zp-bal-card::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(170,238,46,.1),transparent 70%);border-radius:50%}
+.zp-bal-lbl{font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:4px}
+.zp-bal-amt{font-size:22px;font-weight:900;color:#aaee2e;letter-spacing:-.03em}
+.zp-bal-sub{font-size:8px;color:rgba(255,255,255,.3);margin-top:3px}
+.zp-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.zp-qbtn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:7px 4px;text-align:center;font-size:8px;color:rgba(255,255,255,.5);transition:.2s}
+.zp-qbtn .zq-icon{font-size:14px;display:block;margin-bottom:3px}
+.zp-section-lbl{font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:7px;font-weight:700}
+.zp-txns{display:flex;flex-direction:column;gap:5px}
+.zp-txn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border-radius:7px;padding:7px 8px;border:1px solid rgba(255,255,255,.04)}
+.zp-txn-ico{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.zp-txn-ico.g{background:rgba(170,238,46,.12)}
+.zp-txn-ico.b{background:rgba(96,227,245,.1)}
+.zp-txn-ico.r{background:rgba(255,100,100,.1)}
+.zp-txn-info{flex:1;min-width:0}
+.zp-txn-name{font-size:9px;font-weight:700;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zp-txn-date{font-size:8px;color:rgba(255,255,255,.3)}
+.zp-txn-amt{font-size:10px;font-weight:800;white-space:nowrap}
+.zp-txn-amt.cr{color:#aaee2e}
+.zp-txn-amt.dr{color:#ff6b6b}
+.zp-chart-row{display:flex;align-items:flex-end;gap:3px;height:40px;margin-bottom:10px}
+.zp-bar{flex:1;border-radius:3px 3px 0 0;background:rgba(170,238,46,.15);transition:.3s}
+.zp-bar.hi{background:rgba(170,238,46,.5)}
+.zp-stats-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.zp-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:7px;padding:8px}
+.zp-stat-n{font-size:14px;font-weight:900;color:#fff}
+.zp-stat-n span{font-size:9px;font-weight:700;color:#aaee2e}
+.zp-stat-l{font-size:8px;color:rgba(255,255,255,.3);margin-top:2px}
+ 
+/* ─── MEDITRACK MOBILE MOCKUP ─── */
+.meditrack-mock{
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:46%;
+  min-width:140px;
+  background:#0a0e1a;
+  border-radius:20px;
+  border:2px solid rgba(255,255,255,.1);
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.wi:nth-child(2):hover .meditrack-mock{transform:translateX(-50%) translateY(-8px)}
+.mt-notch{width:40px;height:6px;background:rgba(255,255,255,.1);border-radius:0 0 5px 5px;margin:0 auto 8px}
+.mt-screen{padding:10px 10px 16px}
+.mt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mt-hname{font-size:10px;font-weight:800;color:#fff}
+.mt-hname span{color:#60e3f5;display:block;font-size:8px;font-weight:600;opacity:.7}
+.mt-havatar{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#60e3f5,#2b7fff);font-size:8px;font-weight:900;color:#000;display:flex;align-items:center;justify-content:center}
+.mt-search{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:5px;margin-bottom:10px}
+.mt-search span{font-size:9px;color:rgba(255,255,255,.25)}
+.mt-search-ico{font-size:9px;opacity:.4}
+.mt-lbl{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:6px}
+.mt-stats{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px}
+.mt-stat{border-radius:8px;padding:7px;text-align:center}
+.mt-stat.teal{background:linear-gradient(135deg,rgba(96,227,245,.15),rgba(43,127,255,.1));border:1px solid rgba(96,227,245,.2)}
+.mt-stat.grn{background:linear-gradient(135deg,rgba(170,238,46,.1),rgba(80,180,0,.08));border:1px solid rgba(170,238,46,.15)}
+.mt-stat-n{font-size:16px;font-weight:900;color:#fff}
+.mt-stat-l{font-size:7px;color:rgba(255,255,255,.4);margin-top:1px}
+.mt-appt-lbl{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:6px}
+.mt-appts{display:flex;flex-direction:column;gap:5px}
+.mt-appt{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border-radius:7px;padding:6px 7px;border-left:2px solid #60e3f5}
+.mt-appt.grn{border-left-color:#aaee2e}
+.mt-appt.red{border-left-color:#ff6b6b}
+.mt-appt-info{flex:1;min-width:0}
+.mt-appt-name{font-size:8px;font-weight:700;color:rgba(255,255,255,.8)}
+.mt-appt-time{font-size:7px;color:rgba(255,255,255,.35)}
+.mt-appt-badge{font-size:7px;font-weight:700;padding:2px 5px;border-radius:4px;white-space:nowrap}
+.mt-appt-badge.new{background:rgba(96,227,245,.15);color:#60e3f5}
+.mt-appt-badge.done{background:rgba(170,238,46,.15);color:#aaee2e}
+.mt-appt-badge.urg{background:rgba(255,107,107,.15);color:#ff6b6b}
+.mt-vitals{background:rgba(96,227,245,.05);border:1px solid rgba(96,227,245,.1);border-radius:8px;padding:8px;margin-top:8px}
+.mt-vitals-lbl{font-size:7px;text-transform:uppercase;letter-spacing:.1em;color:#60e3f5;margin-bottom:5px;font-weight:700}
+.mt-vitals-row{display:flex;justify-content:space-between}
+.mt-vital{text-align:center}
+.mt-vital-n{font-size:11px;font-weight:900;color:#fff}
+.mt-vital-l{font-size:6px;color:rgba(255,255,255,.3)}
+ 
+/* ─── FARMOPS ERP MOCKUP ─── */
+.farmops-mock{
+  position:absolute;
+  top:12px; left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  background:#0e1206;
+  border-radius:8px;
+  border:1px solid rgba(170,238,46,.1);
+  overflow:hidden;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.wi:nth-child(3):hover .farmops-mock{transform:translateX(-50%) translateY(-6px)}
+.fo-titlebar{background:#141a06;border-bottom:1px solid rgba(170,238,46,.08);padding:6px 10px;display:flex;align-items:center;justify-content:space-between}
+.fo-title{font-size:8px;font-weight:800;color:rgba(170,238,46,.8);letter-spacing:.08em}
+.fo-dots{display:flex;gap:4px}
+.fo-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.1)}
+.fo-body{padding:8px}
+.fo-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:7px}
+.fo-kpi{background:rgba(170,238,46,.06);border:1px solid rgba(170,238,46,.1);border-radius:5px;padding:5px;text-align:center}
+.fo-kpi-n{font-size:11px;font-weight:900;color:#aaee2e}
+.fo-kpi-l{font-size:6px;color:rgba(255,255,255,.35);margin-top:1px}
+.fo-chart-lbl{font-size:7px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.fo-chart{display:flex;align-items:flex-end;gap:2px;height:36px;margin-bottom:7px}
+.fo-cbar{flex:1;border-radius:2px 2px 0 0;background:rgba(170,238,46,.15)}
+.fo-cbar.hi{background:rgba(170,238,46,.5)}
+.fo-table-lbl{font-size:7px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.fo-table{width:100%;border-collapse:collapse}
+.fo-table tr{border-bottom:1px solid rgba(255,255,255,.04)}
+.fo-table td{padding:3px 4px;font-size:7px;color:rgba(255,255,255,.5)}
+.fo-table td:first-child{color:rgba(255,255,255,.75);font-weight:700}
+.fo-badge{display:inline-block;font-size:6px;font-weight:700;padding:1px 4px;border-radius:3px}
+.fo-badge.g{background:rgba(170,238,46,.15);color:#aaee2e}
+.fo-badge.y{background:rgba(245,197,66,.15);color:#f5c542}
+.fo-badge.r{background:rgba(255,107,107,.15);color:#ff6b6b}
+ 
+/* ─── SHOPZIM E-COMMERCE MOCKUP ─── */
+.shopzim-mock{
+  position:absolute;
+  top:12px; left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  background:#050c1a;
+  border-radius:8px;
+  border:1px solid rgba(43,127,255,.15);
+  overflow:hidden;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.wi:nth-child(4):hover .shopzim-mock{transform:translateX(-50%) translateY(-6px)}
+.sz-titlebar{background:#080f1e;border-bottom:1px solid rgba(43,127,255,.1);padding:6px 10px;display:flex;align-items:center;gap:6px}
+.sz-dot{width:6px;height:6px;border-radius:50%}
+.sz-logo{margin-left:6px;font-size:8px;font-weight:900;color:#2b7fff;letter-spacing:.05em}
+.sz-searchbar{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;height:12px;display:flex;align-items:center;padding:0 6px}
+.sz-searchbar span{font-size:7px;color:rgba(255,255,255,.2)}
+.sz-body{padding:7px}
+.sz-banner{background:linear-gradient(135deg,#0d1f4a,#091230);border:1px solid rgba(43,127,255,.2);border-radius:6px;padding:8px;margin-bottom:7px;display:flex;align-items:center;justify-content:space-between}
+.sz-banner-text .sz-b-tag{font-size:7px;color:#2b7fff;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.sz-banner-text .sz-b-title{font-size:11px;font-weight:900;color:#fff;line-height:1.2;margin:2px 0}
+.sz-banner-text .sz-b-btn{display:inline-block;background:#2b7fff;color:#fff;font-size:7px;font-weight:700;padding:3px 7px;border-radius:4px;margin-top:4px}
+.sz-banner-gfx{font-size:28px;opacity:.6}
+.sz-cats{display:flex;gap:4px;margin-bottom:7px;overflow:hidden}
+.sz-cat{background:rgba(43,127,255,.1);border:1px solid rgba(43,127,255,.2);border-radius:20px;padding:3px 8px;font-size:7px;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap}
+.sz-cat.active{background:rgba(43,127,255,.25);color:#2b7fff;border-color:rgba(43,127,255,.4)}
+.sz-grid-lbl{font-size:7px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;display:flex;justify-content:space-between}
+.sz-grid-lbl span{color:#2b7fff}
+.sz-prods{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.sz-prod{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+.sz-prod-img{height:32px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.sz-prod-info{padding:4px 5px}
+.sz-prod-name{font-size:7px;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sz-prod-price{font-size:9px;font-weight:900;color:#2b7fff}
+.sz-prod-price span{font-size:6px;color:rgba(255,255,255,.3);text-decoration:line-through;margin-left:2px}
+.sz-cart-row{display:flex;gap:4px;margin-top:6px}
+.sz-cart-btn{flex:1;background:rgba(43,127,255,.2);border:1px solid rgba(43,127,255,.3);border-radius:5px;padding:4px;font-size:7px;font-weight:700;color:#2b7fff;text-align:center}
+.sz-cart-btn.primary{background:#2b7fff;color:#fff;border-color:#2b7fff}
+.sz-stats-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px}
+.sz-sstat{background:rgba(255,255,255,.03);border-radius:5px;padding:5px;text-align:center}
+.sz-sstat-n{font-size:10px;font-weight:900;color:#fff}
+.sz-sstat-l{font-size:6px;color:rgba(255,255,255,.3)}
+ 
+/* ─── EDUZIM LMS MOCKUP ─── */
+.eduzim-mock{
+  position:absolute;
+  top:12px; left:50%;
+  transform:translateX(-50%);
+  width:48%;
+  min-width:120px;
+  background:#0a0a14;
+  border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.1);
+  overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.6);
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.wi:nth-child(5):hover .eduzim-mock{transform:translateX(-50%) translateY(-6px)}
+.ez-notch{width:36px;height:5px;background:rgba(255,255,255,.1);border-radius:0 0 4px 4px;margin:0 auto 6px}
+.ez-screen{padding:8px 8px 12px}
+.ez-header{text-align:center;margin-bottom:8px}
+.ez-logo{font-size:9px;font-weight:900;color:#f5c542;letter-spacing:.05em}
+.ez-logo span{color:rgba(255,255,255,.5)}
+.ez-sub{font-size:7px;color:rgba(255,255,255,.3);margin-top:2px}
+.ez-progress-card{background:linear-gradient(135deg,rgba(245,197,66,.1),rgba(255,140,0,.05));border:1px solid rgba(245,197,66,.2);border-radius:8px;padding:8px;margin-bottom:7px}
+.ez-pc-lbl{font-size:7px;color:rgba(245,197,66,.7);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.ez-pc-course{font-size:9px;font-weight:800;color:#fff;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ez-progress-bar{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:3px}
+.ez-progress-fill{height:100%;border-radius:3px;background:linear-gradient(to right,#f5c542,#ff8c00)}
+.ez-pc-pct{font-size:8px;font-weight:900;color:#f5c542}
+.ez-courses-lbl{font-size:7px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.ez-courses{display:flex;flex-direction:column;gap:4px}
+.ez-course{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.04);border-radius:6px;padding:5px 6px}
+.ez-course-ico{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+.ez-course-ico.math{background:rgba(96,200,255,.15)}
+.ez-course-ico.sci{background:rgba(170,238,46,.12)}
+.ez-course-ico.eng{background:rgba(245,197,66,.12)}
+.ez-course-info{flex:1;min-width:0}
+.ez-course-name{font-size:7px;font-weight:700;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ez-course-prog{font-size:6px;color:rgba(255,255,255,.3);margin-top:1px}
+.ez-course-pct{font-size:8px;font-weight:800;color:#f5c542}
+.ez-bottom-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:7px}
+.ez-bs{background:rgba(255,255,255,.03);border-radius:5px;padding:4px;text-align:center}
+.ez-bs-n{font-size:10px;font-weight:900;color:#fff}
+.ez-bs-l{font-size:6px;color:rgba(255,255,255,.3)}
+ 
+/* Overlay gradients for cards */
+.wi-overlay{position:absolute;inset:0;pointer-events:none;z-index:5}
+.wi:nth-child(1) .wi-overlay{background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 35%,transparent 60%)}
+.wi:nth-child(2) .wi-overlay{background:linear-gradient(to top,rgba(10,14,26,.95) 0%,rgba(10,14,26,.2) 40%,transparent 65%)}
+.wi:nth-child(3) .wi-overlay{background:linear-gradient(to top,rgba(8,10,3,.95) 0%,rgba(8,10,3,.2) 40%,transparent 65%)}
+.wi:nth-child(4) .wi-overlay{background:linear-gradient(to top,rgba(5,12,26,.95) 0%,rgba(5,12,26,.2) 40%,transparent 65%)}
+.wi:nth-child(5) .wi-overlay{background:linear-gradient(to top,rgba(10,10,20,.95) 0%,rgba(10,10,20,.2) 40%,transparent 65%)}
+ 
+/* Card backgrounds */
+.wbg1{background:linear-gradient(145deg,#071a02,#030f01)}
+.wbg2{background:linear-gradient(145deg,#070c1a,#030409)}
+.wbg3{background:linear-gradient(145deg,#0e1206,#060804)}
+.wbg4{background:linear-gradient(145deg,#050c1a,#020408)}
+.wbg5{background:linear-gradient(145deg,#0a0a14,#050508)}
+ 
+@media(max-width:1024px){
+  .work-grid{display:flex;flex-direction:column}
+  .wi{min-height:300px!important;aspect-ratio:auto!important}
+}
 </style>
 </head>
 <body>
@@ -421,46 +726,294 @@ footer{background:var(--charcoal);padding:80px 40px 36px;border-top:1px solid va
   </div>
 </div>
 
-<!-- WORK -->
-<section id="work" class="sec">
+<section id="work" class="sec" style="background:#080808">
   <div class="svc-header">
     <div>
-      <p class="sec-label reveal">Portfolio</p>
-      <h2 class="sec-title reveal">Selected <em>work</em></h2>
+      <p class="sec-label">Portfolio</p>
+      <h2 class="sec-title">Selected <em>work</em></h2>
     </div>
-    <a href="#contact" class="btn-outline reveal">All projects ↗</a>
+    <a href="#contact" class="btn-outline">All projects ↗</a>
   </div>
+ 
   <div class="work-grid">
-    <div class="wi reveal">
+ 
+    <!-- 1. ZIMPAY -->
+    <div class="wi">
       <div class="wi-bg wbg1"></div>
+      <div class="mockup-wrap">
+        <div class="zimpay-mock">
+          <div class="zp-titlebar">
+            <div style="display:flex;gap:4px"><div class="zp-dot r"></div><div class="zp-dot y"></div><div class="zp-dot g"></div></div>
+            <div class="zp-url">Zimpay/dashboard</div>
+            <div style="width:40px"></div>
+          </div>
+          <div class="zp-body">
+            <div class="zp-sidebar">
+              <div class="zp-sb-icon active">💳</div>
+              <div class="zp-sb-icon">📊</div>
+              <div class="zp-sb-icon">↕️</div>
+              <div class="zp-sb-icon">👥</div>
+              <div class="zp-sb-icon" style="margin-top:auto">⚙️</div>
+            </div>
+            <div class="zp-main">
+              <div class="zp-topbar">
+                <div class="zp-greeting">Good morning, <span>Noel ↗</span></div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="font-size:9px;background:rgba(170,238,46,.1);color:#aaee2e;padding:2px 7px;border-radius:20px;border:1px solid rgba(170,238,46,.2)">● Live</span>
+                  <div class="zp-avatar">NM</div>
+                </div>
+              </div>
+              <div class="zp-stats-row">
+                <div class="zp-stat"><div class="zp-stat-n">$84.2K <span>↑12%</span></div><div class="zp-stat-l">Total Volume Today</div></div>
+                <div class="zp-stat"><div class="zp-stat-n">1,429 <span>↑8%</span></div><div class="zp-stat-l">Transactions</div></div>
+              </div>
+              <div class="zp-bal-card">
+                <div class="zp-bal-lbl">Available Balance</div>
+                <div class="zp-bal-amt">$12,450.80</div>
+                <div class="zp-bal-sub">ZimPay Business · **** 4421</div>
+              </div>
+              <div class="zp-quick">
+                <div class="zp-qbtn"><span class="zq-icon">↑</span>Send</div>
+                <div class="zp-qbtn"><span class="zq-icon">↓</span>Receive</div>
+                <div class="zp-qbtn"><span class="zq-icon">⇄</span>Convert</div>
+                <div class="zp-qbtn"><span class="zq-icon">📋</span>History</div>
+              </div>
+              <div class="zp-section-lbl">Recent Transactions</div>
+              <div class="zp-txns">
+                <div class="zp-txn">
+                  <div class="zp-txn-ico g">🛒</div>
+                  <div class="zp-txn-info"><div class="zp-txn-name">TM Supermarkets</div><div class="zp-txn-date">Today, 09:14</div></div>
+                  <div class="zp-txn-amt dr">-$124.50</div>
+                </div>
+                <div class="zp-txn">
+                  <div class="zp-txn-ico b">💼</div>
+                  <div class="zp-txn-info"><div class="zp-txn-name">Client Payment — Moyo Ltd</div><div class="zp-txn-date">Today, 08:32</div></div>
+                  <div class="zp-txn-amt cr">+$2,400.00</div>
+                </div>
+                <div class="zp-txn">
+                  <div class="zp-txn-ico r">⚡</div>
+                  <div class="zp-txn-info"><div class="zp-txn-name">ZESA Token Purchase</div><div class="zp-txn-date">Yesterday</div></div>
+                  <div class="zp-txn-amt dr">-$50.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wi-overlay"></div>
       <span class="wi-tag">Fintech</span>
-      <span class="wi-gfx">$</span>
-      <div class="wi-info"><span class="wi-cat">Web App · 2024</span><h3 class="wi-name">ZimPay — Digital Payment Platform</h3></div>
+      <div class="wi-info">
+        <span class="wi-cat">Web App · 2024</span>
+        <h3 class="wi-name">ZimPay — Digital Payment Platform</h3>
+      </div>
     </div>
-    <div class="wi reveal">
+ 
+    <!-- 2. MEDITRACK -->
+    <div class="wi">
       <div class="wi-bg wbg2"></div>
+      <div class="mockup-wrap">
+        <div class="meditrack-mock">
+          <div class="mt-notch"></div>
+          <div class="mt-screen">
+            <div class="mt-header">
+              <div class="mt-hname">MediTrack <span>Patient Dashboard</span></div>
+              <div class="mt-havatar">DR</div>
+            </div>
+            <div class="mt-search">
+              <span class="mt-search-ico">🔍</span>
+              <span>Search patients...</span>
+            </div>
+            <div class="mt-lbl">Today's Overview</div>
+            <div class="mt-stats">
+              <div class="mt-stat teal"><div class="mt-stat-n">24</div><div class="mt-stat-l">Appointments</div></div>
+              <div class="mt-stat grn"><div class="mt-stat-n">142</div><div class="mt-stat-l">Active Patients</div></div>
+            </div>
+            <div class="mt-appt-lbl">Upcoming Appointments</div>
+            <div class="mt-appts">
+              <div class="mt-appt">
+                <div class="mt-appt-info"><div class="mt-appt-name">Chido Mutasa</div><div class="mt-appt-time">09:30 · General Checkup</div></div>
+                <div class="mt-appt-badge new">New</div>
+              </div>
+              <div class="mt-appt grn">
+                <div class="mt-appt-info"><div class="mt-appt-name">Farai Dube</div><div class="mt-appt-time">10:00 · Follow-up</div></div>
+                <div class="mt-appt-badge done">Done</div>
+              </div>
+              <div class="mt-appt red">
+                <div class="mt-appt-info"><div class="mt-appt-name">Tapiwa Moyo</div><div class="mt-appt-time">10:45 · Urgent</div></div>
+                <div class="mt-appt-badge urg">Urgent</div>
+              </div>
+            </div>
+            <div class="mt-vitals">
+              <div class="mt-vitals-lbl">Last Patient Vitals</div>
+              <div class="mt-vitals-row">
+                <div class="mt-vital"><div class="mt-vital-n">98.6°</div><div class="mt-vital-l">Temp</div></div>
+                <div class="mt-vital"><div class="mt-vital-n">120/80</div><div class="mt-vital-l">BP</div></div>
+                <div class="mt-vital"><div class="mt-vital-n">72</div><div class="mt-vital-l">BPM</div></div>
+                <div class="mt-vital"><div class="mt-vital-n">98%</div><div class="mt-vital-l">SpO2</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wi-overlay"></div>
       <span class="wi-tag">Healthcare</span>
-      <span class="wi-gfx">+</span>
-      <div class="wi-info"><span class="wi-cat">Mobile App · 2024</span><h3 class="wi-name">MediTrack — Patient Management System</h3></div>
+      <div class="wi-info">
+        <span class="wi-cat">Mobile App · 2024</span>
+        <h3 class="wi-name">MediTrack — Patient Management System</h3>
+      </div>
     </div>
-    <div class="wi reveal">
+ 
+    <!-- 3. FARMOPS -->
+    <div class="wi">
       <div class="wi-bg wbg3"></div>
+      <div class="mockup-wrap">
+        <div class="farmops-mock">
+          <div class="fo-titlebar">
+            <span class="fo-title">🌾 FarmOps ERP</span>
+            <div class="fo-dots"><div class="fo-dot"></div><div class="fo-dot"></div><div class="fo-dot"></div></div>
+          </div>
+          <div class="fo-body">
+            <div class="fo-kpis">
+              <div class="fo-kpi"><div class="fo-kpi-n">842ha</div><div class="fo-kpi-l">Total Area</div></div>
+              <div class="fo-kpi"><div class="fo-kpi-n">94%</div><div class="fo-kpi-l">Yield Rate</div></div>
+              <div class="fo-kpi"><div class="fo-kpi-n">$41K</div><div class="fo-kpi-l">Revenue</div></div>
+            </div>
+            <div class="fo-chart-lbl">Monthly Harvest (tonnes)</div>
+            <div class="fo-chart">
+              <div class="fo-cbar" style="height:40%"></div>
+              <div class="fo-cbar" style="height:55%"></div>
+              <div class="fo-cbar" style="height:45%"></div>
+              <div class="fo-cbar" style="height:70%"></div>
+              <div class="fo-cbar hi" style="height:90%"></div>
+              <div class="fo-cbar" style="height:75%"></div>
+              <div class="fo-cbar" style="height:65%"></div>
+            </div>
+            <div class="fo-table-lbl">Crop Status</div>
+            <table class="fo-table">
+              <tr><td>Maize — Field A</td><td>120t</td><td><span class="fo-badge g">Ready</span></td></tr>
+              <tr><td>Soya — Field B</td><td>84t</td><td><span class="fo-badge y">Growing</span></td></tr>
+              <tr><td>Wheat — Field C</td><td>60t</td><td><span class="fo-badge r">At Risk</span></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="wi-overlay"></div>
       <span class="wi-tag">Agriculture</span>
-      <span class="wi-gfx">⬡</span>
-      <div class="wi-info"><span class="wi-cat">ERP · 2023</span><h3 class="wi-name">FarmOps — Agricultural ERP</h3></div>
+      <div class="wi-info">
+        <span class="wi-cat">ERP · 2023</span>
+        <h3 class="wi-name">FarmOps — Agricultural ERP</h3>
+      </div>
     </div>
-    <div class="wi reveal">
+ 
+    <!-- 4. SHOPZIM -->
+    <div class="wi">
       <div class="wi-bg wbg4"></div>
+      <div class="mockup-wrap">
+        <div class="shopzim-mock">
+          <div class="sz-titlebar">
+            <div style="display:flex;gap:3px"><div class="sz-dot" style="background:#ff5f57"></div><div class="sz-dot" style="background:#febc2e"></div><div class="sz-dot" style="background:#28c840"></div></div>
+            <span class="sz-logo">ShopZim</span>
+            <div class="sz-searchbar"><span>🔍 Search products...</span></div>
+          </div>
+          <div class="sz-body">
+            <div class="sz-banner">
+              <div class="sz-banner-text">
+                <div class="sz-b-tag">Flash Sale 🔥</div>
+                <div class="sz-b-title">Up to 40%<br>off today</div>
+                <div class="sz-b-btn">Shop Now →</div>
+              </div>
+              <div class="sz-banner-gfx">🛍️</div>
+            </div>
+            <div class="sz-cats">
+              <div class="sz-cat active">All</div>
+              <div class="sz-cat">Electronics</div>
+              <div class="sz-cat">Fashion</div>
+              <div class="sz-cat">Home</div>
+            </div>
+            <div class="sz-grid-lbl">Featured Products <span>See all →</span></div>
+            <div class="sz-prods">
+              <div class="sz-prod">
+                <div class="sz-prod-img" style="background:rgba(43,127,255,.08)">📱</div>
+                <div class="sz-prod-info">
+                  <div class="sz-prod-name">Samsung A54</div>
+                  <div class="sz-prod-price">$280 <span>$350</span></div>
+                </div>
+              </div>
+              <div class="sz-prod">
+                <div class="sz-prod-img" style="background:rgba(170,238,46,.06)">💻</div>
+                <div class="sz-prod-info">
+                  <div class="sz-prod-name">HP Pavilion</div>
+                  <div class="sz-prod-price">$520 <span>$650</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="sz-stats-mini">
+              <div class="sz-sstat"><div class="sz-sstat-n">12K</div><div class="sz-sstat-l">Products</div></div>
+              <div class="sz-sstat"><div class="sz-sstat-n">4.8★</div><div class="sz-sstat-l">Rating</div></div>
+              <div class="sz-sstat"><div class="sz-sstat-n">8K+</div><div class="sz-sstat-l">Orders</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wi-overlay"></div>
       <span class="wi-tag">Retail</span>
-      <span class="wi-gfx">◈</span>
-      <div class="wi-info"><span class="wi-cat">E-commerce · 2023</span><h3 class="wi-name">ShopZim — National Retail Platform</h3></div>
+      <div class="wi-info">
+        <span class="wi-cat">E-commerce · 2023</span>
+        <h3 class="wi-name">ShopZim — National Retail Platform</h3>
+      </div>
     </div>
-    <div class="wi reveal">
+ 
+    <!-- 5. EDUZIM -->
+    <div class="wi">
       <div class="wi-bg wbg5"></div>
+      <div class="mockup-wrap">
+        <div class="eduzim-mock">
+          <div class="ez-notch"></div>
+          <div class="ez-screen">
+            <div class="ez-header">
+              <div class="ez-logo">Edu<span>Zim</span></div>
+              <div class="ez-sub">Learning Management System</div>
+            </div>
+            <div class="ez-progress-card">
+              <div class="ez-pc-lbl">Continue Learning</div>
+              <div class="ez-pc-course">Advanced Mathematics</div>
+              <div class="ez-progress-bar"><div class="ez-progress-fill" style="width:68%"></div></div>
+              <div class="ez-pc-pct">68% complete</div>
+            </div>
+            <div class="ez-courses-lbl">My Courses</div>
+            <div class="ez-courses">
+              <div class="ez-course">
+                <div class="ez-course-ico math">📐</div>
+                <div class="ez-course-info"><div class="ez-course-name">Advanced Mathematics</div><div class="ez-course-prog">Unit 4 of 6</div></div>
+                <div class="ez-course-pct">68%</div>
+              </div>
+              <div class="ez-course">
+                <div class="ez-course-ico sci">🔬</div>
+                <div class="ez-course-info"><div class="ez-course-name">Biology A-Level</div><div class="ez-course-prog">Unit 2 of 8</div></div>
+                <div class="ez-course-pct">24%</div>
+              </div>
+              <div class="ez-course">
+                <div class="ez-course-ico eng">✍️</div>
+                <div class="ez-course-info"><div class="ez-course-name">English Literature</div><div class="ez-course-prog">Unit 5 of 5</div></div>
+                <div class="ez-course-pct">100%</div>
+              </div>
+            </div>
+            <div class="ez-bottom-stats">
+              <div class="ez-bs"><div class="ez-bs-n">3</div><div class="ez-bs-l">Courses</div></div>
+              <div class="ez-bs"><div class="ez-bs-n">14</div><div class="ez-bs-l">Badges</div></div>
+              <div class="ez-bs"><div class="ez-bs-n">92%</div><div class="ez-bs-l">Score</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wi-overlay"></div>
       <span class="wi-tag">Education</span>
-      <span class="wi-gfx">✦</span>
-      <div class="wi-info"><span class="wi-cat">Platform · 2023</span><h3 class="wi-name">EduZim — Learning Management System</h3></div>
+      <div class="wi-info">
+        <span class="wi-cat">Platform · 2023</span>
+        <h3 class="wi-name">EduZim — Learning Management System</h3>
+      </div>
     </div>
+ 
   </div>
 </section>
 
